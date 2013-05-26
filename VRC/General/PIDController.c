@@ -1,4 +1,77 @@
-struct PIDController {
+/* PID Controller for Vex
+ * P: Proportional
+ * I: Integral
+ * D: Derivative
+ *
+ * PID Controllers are used to calulate the error between a sensor value and a setpoint.
+ * It then calculates the appropriate output to reach the target. You will need to define
+ * three constants the P, I, and D.
+ *
+ * Based on how large the error is, the P constant will proportionally increase or decrease
+ *  the output. For example, if the error is very large, the output will be very large.
+ *  If the error is small, the output will be small. Remember that a maximum output exists
+ *  for the output (usually on a scale from -128 to 127) whereas the error can be any number
+ *  depending on the input. For example, Potentiometers input numbers into the thousands, so
+ *  the error can go into the thousands. The output for the motors is -128 to 127; therefore
+ *  you would need to scale the output accordingly.
+ *
+ * The I part of PID uses previous error values to give an accumulated offset that should have
+ *  been corrected previously. This can reduce the time it takes to reach the setpoint, but
+ *  may lead to overshooting! The I constant reduces the output of this and scales it
+ *  appropriately. You should use an I constance that reduce the time it takes to reach the
+ *  setpoint but doesn't make you overshoot to much.
+ *
+ * The D part of PID calculates the slope of error over time (derivative) and multiplies this
+ *  by by the D constance. This improves stability and settling time.
+ *
+ * To summarize this, P jumps you to your setpoint, I gives you a boost, and D stabilizes you!
+ */
 
+typedef struct {
+	bool enabled;
+	float kP, kI, kD;
+	int setpoint;
+	int maxOutput, minOutput;
+	int error, totalError, prevError;
+} PIDController;
 
+void init(PIDController controller, float kP, float kI, float kD) {
+	controller.kP = kP;
+	controller.kI = kI;
+	controller.kD = kD;
+}
+void setSetpoint(PIDController controller, int setpoint) {
+	controller.setpoint = setpoint;
+	controller.totalError = 0.0;
+	controller.prevError = 0.0;
+}
+void setThresholds(PIDController controller, int max, int min) {
+	controller.maxOutput = max;
+	controller.minOutput = min;
+}
+void setEnabled(PIDController controller, bool en) {
+	controller.enabled = en;
+}
+int calculate(PIDController controller, int input) {
+	if (!controller.enabled) {
+		return 0.0;
+	}
+	controller.error = controller.setpoint - input;
+	controller.totalError += controller.error;
+
+	int output = controller.kP * controller.error +
+               controller.kI * controller.totalError +
+               controller.kD * (controller.prevError - controller.error);
+
+	if (controller.maxOutput != 0 && controller.minOutput != 0.0) {
+		if (output > controller.maxOutput) {
+			output = controller.maxOutput;
+		}
+		if (output < controller.minOutput) {
+			output = controller.minOutput;
+		}
+	}
+
+	controller.prevError = controller.error;
+	return output;
 }
