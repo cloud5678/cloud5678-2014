@@ -9,17 +9,16 @@
  *
  * Based on how large the error is, the P constant will proportionally increase or decrease
  *  the output. For example, if the error is very large, the output will be very large.
- *  If the error is small, the output will be small. Remember that a maximum output exists
- *  for the output (usually on a scale from -128 to 127) whereas the error can be any number
- *  depending on the input. For example, Potentiometers input numbers into the thousands, so
- *  the error can go into the thousands. The output for the motors is -128 to 127; therefore
- *  you would need to scale the output accordingly.
+ *  If the error is small, the output will be small. The output for Vex motors range from 
+ *  -128 to 127 therefore you need to scale the input of a gyroscope for example (-3600 to 
+ *  3600) to match the motors. Basically P will proportionally jump you to your setpoint based
+ *  on how much farther you need to go to reach it.
  *
  * The I part of PID uses previous error values to give an accumulated offset that should have
  *  been corrected previously. This can reduce the time it takes to reach the setpoint, but
  *  may lead to overshooting! The I constant reduces the output of this and scales it
- *  appropriately. You should use an I constance that reduce the time it takes to reach the
- *  setpoint but doesn't make you overshoot to much.
+ *  appropriately. You should use an I constant that reduces the time it takes to reach the
+ *  setpoint but doesn't make yit overshoot to much.
  *
  * The D part of PID calculates the slope of error over time (derivative) and multiplies this
  *  by by the D constance. This improves stability and settling time.
