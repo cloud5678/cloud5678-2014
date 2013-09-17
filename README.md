@@ -9,7 +9,7 @@ Nolan Shah, TBD
 Nimbus (5678N) Contributors:  
 TBD  
 Stratus (5678S) Contributors:  
-  
+  Mason Cole
 
 This repository will contain the latest code for the current VEX game ([Toss Up](http://www.vexforum.com/wiki/Toss_Up)). 
 Please keep your subteam's code in your subteam folder and any shared libraries in the Shared folder.
