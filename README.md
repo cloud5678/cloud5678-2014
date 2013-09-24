@@ -5,7 +5,7 @@ Carnegie Vanguard High School (Cloud) Robotics
 Code Repository for 2013-2014.
 
 ThunderCloud (5678) Contributors:  
-Nolan Shah, TBD, Erik Ostlind 
+Nolan Shah, TBD, Erik Ostlind   
 Nimbus (5678N) Contributors:  
 Michael Marino
 Stratus (5678S) Contributors:  
