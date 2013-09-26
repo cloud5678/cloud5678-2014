@@ -78,7 +78,7 @@ task usercontrol()
 		motor[port3] = (vexRT[Ch2] - vexRT[Ch1]);
 		motor[port4] = (vexRT[Ch2] - vexRT[Ch1]);
 		}
-		else if(vexRT[Ch2] < -20)
+		else if(vexRT[Ch1] < -20)
 		{
 			motor[port3] = vexRT[Ch2];
 			motor[port4] = vexRT[Ch2];
