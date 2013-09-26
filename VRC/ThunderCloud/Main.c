@@ -1,4 +1,5 @@
 #pragma config(I2C_Usage, I2C1, i2cSensors)
+#pragma config(Sensor, in1,    poten,          sensorPotentiometer)
 #pragma config(Sensor, I2C_1,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Sensor, I2C_2,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Motor,  port1,           frontLeft,     tmotorVex393, openLoop)
@@ -47,7 +48,7 @@ task usercontrol() {
 	  int movX = scaleInput(vexRT[Ch3]);
 	  int movY = scaleInput(vexRT[Ch4]);
 	  drive_arcade(movX, movY);
-	  
+
 	  int movZ = vexRT[Ch2];
 	  liftarm(movZ);
 	}
