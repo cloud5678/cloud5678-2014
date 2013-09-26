@@ -17,14 +17,15 @@
 #pragma userControlDuration(125)
 
 #include "Vex_Competition_Includes.c"
+#include "PIDController.c"
 
 void drive_arcade(int x, int y) {
 	motor[frontLeft] = motor[backLeft] = x + y;
 	motor[frontRight] = motor[backRight] = x - y;
 }
-void liftarm(int t)
+void liftarm(int z)
 {
-	motor[armright] = motor[armleft] = t;
+	motor[armright] = motor[armleft] = z;
 }
 int scaleInput(int a) {
 	return a;
@@ -46,7 +47,8 @@ task usercontrol() {
 	  int movX = scaleInput(vexRT[Ch3]);
 	  int movY = scaleInput(vexRT[Ch4]);
 	  drive_arcade(movX, movY);
-	  int z = vexRT[Ch2];
-	  liftarm(z);
+	  
+	  int movZ = vexRT[Ch2];
+	  liftarm(movZ);
 	}
 }
