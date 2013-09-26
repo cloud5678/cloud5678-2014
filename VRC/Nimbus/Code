@@ -71,6 +71,8 @@ task usercontrol()
 	  // .....................................................................................
 	  // Insert user code here. This is where you use the joystick values to update your motors, etc.
 	  // .....................................................................................
+	  	motor[port5] = vexRT[Ch3];
+		motor[port6] = vexRT[Ch3];
 		if(vexRT[Ch1] > 20)
 		{
 		motor[port1] = vexRT[Ch2];
