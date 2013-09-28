@@ -66,7 +66,7 @@ task usercontrol() {
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
 	  int intakeSpeed = 127*(vexRT[Btn5U]-vexRT[Btn5D]);
-	  /*if (vexRT[Btn8R] == 1) {
+	  if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
 	 			setSetpoint(armPID, SensorValue[pot]);
 	 			setEnabled(armPID, true);
@@ -83,13 +83,13 @@ task usercontrol() {
 				setSetpoint(turnPID, SensorValue[gyro]);
 				setThresholds(turnPID, -127, 127);
 			}
-		}*/
+		}
 
-	  driveArcade(/*turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : */driveX, driveY);
-	 // if (armPID.enabled != true) {
+	  driveArcade(turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : driveX, driveY);
+	  if (armPID.enabled != true) {
 	  	setArmSpeed(armSpeed);
-	 // } else {
-	 // 	setArmSpeed(calculate(armPID, SensorValue[pot]));
+	  } else {
+	/ 	setArmSpeed(calculate(armPID, SensorValue[pot]));
 	  setIntakeSpeed(intakeSpeed);
 	}
 }
