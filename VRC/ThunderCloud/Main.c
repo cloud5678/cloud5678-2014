@@ -89,7 +89,8 @@ task usercontrol() {
 	  if (armPID.enabled != true) {
 	  	setArmSpeed(armSpeed);
 	  } else {
-	/ 	setArmSpeed(calculate(armPID, SensorValue[pot]));
-	  setIntakeSpeed(intakeSpeed);
+	 		setArmSpeed(calculate(armPID, SensorValue[pot]));
+	  	setIntakeSpeed(intakeSpeed);
+	  }
 	}
 }
