@@ -24,6 +24,10 @@
 #pragma userControlDuration(125)
 
 #include "Vex_Competition_Includes.c"
+#include "PIDController.c"
+
+PIDController armPID;
+PIDController turnPID;
 
 void driveArcade(int x, int y) {
 	motor[frontLeft] = motor[backLeft] = y + x;
@@ -45,6 +49,8 @@ int scaleInput(int a) {
 ///////////////////////////////////////////////////////////
 
 void pre_auton() {
+	init(armPID, 0, 0, 0);
+	init(turnPID, 0, 0, 0);
 	// Autonomous initialization
   bStopTasksBetweenModes = true;
 
@@ -60,9 +66,30 @@ task usercontrol() {
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
 	  int intakeSpeed = 127*(vexRT[Btn5U]-vexRT[Btn5D]);
+	  /*if (vexRT[Btn8R] == 1) {
+	  	if (armPID.enabled != true) {
+	 			setSetpoint(armPID, SensorValue[pot]);
+	 			setEnabled(armPID, true);
+	 			setThresholds(armPID, -127, 127);
+	 		} else {
+	 			setEnabled(armPID, false);
+	 		}
+		}
+	  if (vexRT[Btn8D] == 1) {
+			if (turnPID.enabled == true) {
+				setEnabled(turnPID, false);
+			} else {
+				setEnabled(turnPID, true);
+				setSetpoint(turnPID, SensorValue[gyro]);
+				setThresholds(turnPID, -127, 127);
+			}
+		}*/
 
-	  driveArcade(driveX, driveY);
+	  driveArcade(/*turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : */driveX, driveY);
+	 // if (armPID.enabled != true) {
 	  	setArmSpeed(armSpeed);
+	 // } else {
+	 // 	setArmSpeed(calculate(armPID, SensorValue[pot]));
 	  setIntakeSpeed(intakeSpeed);
 	}
 }
