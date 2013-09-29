@@ -29,6 +29,31 @@
 PIDController armPID;
 PIDController turnPID;
 
+int pickSide()
+{
+	int side = -1;
+	while (true)
+	{
+		clearLCDLine(0);
+	 	clearLCDLine(1);
+	 	displayLCDPos(0, 0);
+	 	displayLCDCenteredString(0,"Which Side?");
+	 	displayLCDPos(1, 0);
+	 	displayNextLCDString("Left       Right");
+	 	if(nLCDButtons == 1)
+	 	{
+	 		side = 0;
+	 		break;
+		}
+		else if(nLCDButtons == 4)
+		{
+			side = 1;
+			break;
+		}
+	}
+ 	return side;
+}
+
 void driveArcade(int x, int y) {
 	motor[frontLeft] = motor[backLeft] = y + x;
 	motor[frontRight] = motor[backRight] = y - x;
