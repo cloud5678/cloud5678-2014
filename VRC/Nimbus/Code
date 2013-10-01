@@ -45,11 +45,61 @@ void pre_auton()
 
 task autonomous()
 {
-  // .....................................................................................
-  // Insert user code here.
-  // .....................................................................................
-
-	AutonomousCodePlaceholderForTesting();  // Remove this function call once you have "real" code.
+	//Hits first friendly large ball into goal zone.
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftArm] = 80;
+  motor[rightArm] = 80;
+	}
+	//Keeps arm lifted, turns to the right 90 degrees.
+	ClearTimer(T1);
+	while(time1[T1] < 500)
+	{
+	motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = -127;
+  motor[rightRear] = -127;
+  motor[leftArm] = 80;
+  motor[rightArm] = 80;
+	}
+	//Hits second friendly large ball into goal zone.
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftArm] = 80;
+  motor[rightArm] = 80;
+	}
+	//Lowers arm in prep for going under barrier, turns to the left 90 degrees.
+	ClearTimer(T1);
+	while(time1[T1] < 500)
+	{
+  motor[leftFront] = -127;
+  motor[leftRear] = -127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftArm] = 0;
+  motor[rightArm] = 0;
+	}
+	//Moves up to the goal.
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftArm] = 0;
+  motor[rightArm] = 0;
+	}
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
