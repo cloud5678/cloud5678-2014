@@ -64,7 +64,6 @@ task autonomous()
 task usercontrol()
 {
 	// User control code here, inside the loop
-
 	while (true)
 	{
 	  // This is the main execution loop for the user control program. Each time through the loop
@@ -73,28 +72,44 @@ task usercontrol()
 	  // .....................................................................................
 	  // Insert user code here. This is where you use the joystick values to update your motors, etc.
 	  // .....................................................................................
-	  	motor[port5] = vexRT[Ch3];
-		motor[port6] = vexRT[Ch3];
-		if(vexRT[Ch1] > 20)
+
+		//Arm
+	  //Use Left Stick
+		motor[leftArm] = 2*(vexRT[Ch3])/3;
+		motor[rightArm] = 2*(vexRT[Ch3])/3;
+
+		//Intake
+		//RB Upper is Intake, LB Upper is Output
+		if (vexRT[Btn5U] == 1)
 		{
-		motor[port1] = vexRT[Ch2];
-		motor[port2] = vexRT[Ch2];
-		motor[port9] = (vexRT[Ch2] - vexRT[Ch1]);
-		motor[port10] = (vexRT[Ch2] - vexRT[Ch1]);
+			motor[port3] = -127;
+			motor[port4] = -127;
 		}
-		else if(vexRT[Ch1] < -20)
+		else if (vexRT[Btn6U] == 1)
 		{
-			motor[port9] = vexRT[Ch2];
-			motor[port10] = vexRT[Ch2];
-			motor[port1] = (vexRT[Ch2] - vexRT[Ch1]);
-			motor[port2] = (vexRT[Ch2] - vexRT[Ch1]);
+			motor[port3] = 127;
+			motor[port4] = 127;
+		}
+		else
+		{
+			motor[port3] = 0;
+			motor[port4] = 0;
+		}
+		//Turning/Straight driving
+		//Use Right-Stick
+		if((vexRT[Ch1] > 20) || (vexRT[Ch1] < -20))
+		{
+			motor[port1] = (vexRT[Ch2] + vexRT[Ch4]);
+			motor[port2] = (vexRT[Ch2] + vexRT[Ch4]);
+			motor[port9] = (vexRT[Ch2] - vexRT[Ch4]);
+			motor[port10]= (vexRT[Ch2] - vexRT[Ch4]);
 		}
 		else
 		{
 			motor[port1] = vexRT[Ch2];
 			motor[port2] = vexRT[Ch2];
 			motor[port9] = vexRT[Ch2];
-			motor[port10] = vexRT[Ch2];
+			motor[port10]= vexRT[Ch2];
+		}
 	}
-}
 }
