@@ -1,5 +1,5 @@
 /* PID Controller for Vex
- * 
+ *
  * P: Proportional
  * I: Integral
  * D: Derivative
@@ -10,8 +10,8 @@
  *
  * Based on how large the error is, the P constant will proportionally increase or decrease
  *  the output. For example, if the error is very large, the output will be very large.
- *  If the error is small, the output will be small. The output for Vex motors range from 
- *  -128 to 127 therefore you need to scale the input of a gyroscope for example (-3600 to 
+ *  If the error is small, the output will be small. The output for Vex motors range from
+ *  -128 to 127 therefore you need to scale the input of a gyroscope for example (-3600 to
  *  3600) to match the motors. Basically P will proportionally jump you to your setpoint based
  *  on how much farther you need to go to reach it.
  *
@@ -63,7 +63,7 @@ int calculate(PIDController controller, int input) {
                controller.kI * controller.totalError +
                controller.kD * (controller.prevError - controller.error);
 
-	if (controller.maxOutput != 0 && controller.minOutput != 0.0) {
+	if (controller.maxOutput != 0 && controller.minOutput != 0) {
 		if (output > controller.maxOutput) {
 			output = controller.maxOutput;
 		}

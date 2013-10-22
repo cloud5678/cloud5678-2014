@@ -4,12 +4,12 @@
 #pragma config(Sensor, in3,    accel,          sensorAccelerometer)
 #pragma config(Sensor, I2C_1,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Sensor, I2C_2,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
-#pragma config(Motor,  port1,           frontLeft,     tmotorVex393, openLoop, reversed)
+#pragma config(Motor,  port5,           frontLeft,     tmotorVex393, openLoop)
 #pragma config(Motor,  port2,           backLeft,      tmotorVex393, openLoop, encoder, encoderPort, I2C_1, 1000)
 #pragma config(Motor,  port3,           frontRight,    tmotorVex393, openLoop, reversed)
 #pragma config(Motor,  port4,           backRight,     tmotorVex393, openLoop, reversed, encoder, encoderPort, I2C_2, 1000)
-#pragma config(Motor,  port5,           armLeft,       tmotorVex393, openLoop)
-#pragma config(Motor,  port6,           armRight,      tmotorVex393, openLoop, reversed)
+#pragma config(Motor,  port1,           armLeft,       tmotorVex393, openLoop)
+#pragma config(Motor,  port6,           armRight,      tmotorVex393, openLoop)
 #pragma config(Motor,  port7,           intakeLeft,    tmotorVex393, openLoop)
 #pragma config(Motor,  port8,           intakeRight,   tmotorVex393, openLoop, reversed)
 #pragma config(Motor,  port9,           armLeft2,      tmotorVex393, openLoop)
@@ -28,6 +28,9 @@
 
 PIDController armPID;
 PIDController turnPID;
+
+const int ARMAX = 3812;
+const int ARMIN = 2000;
 
 int pickSide()
 {
@@ -76,6 +79,14 @@ int scaleInput(int a) {
 void pre_auton() {
 	init(armPID, 0, 0, 0);
 	init(turnPID, 0, 0, 0);
+
+	SensorType[gyro] = sensorNone;
+	wait1Msec(1000);
+	SensorType[gyro] = sensorGyro;
+	wait1Msec(2000);
+	SensorValue[gyro]=0;
+	SensorFullCount[gyro]=3600;
+
 	// Autonomous initialization
   bStopTasksBetweenModes = true;
 
@@ -83,6 +94,8 @@ void pre_auton() {
 task autonomous() {
 	// Autonomous
 }
+int a;
+
 task usercontrol() {
 	// User control initialization
 
@@ -90,10 +103,10 @@ task usercontrol() {
 	  int driveX = scaleInput(vexRT[Ch4]);
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
-	  int intakeSpeed = 127*(vexRT[Btn5U]-vexRT[Btn5D]);
+	  int intakeSpeed = a = 127*(vexRT[Btn5U]|vexRT[Btn5D]-vexRT[Btn6U]|vexRT[Btn6D]);
 	  if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
-	 			setSetpoint(armPID, SensorValue[pot]);
+	 			setSetpoint(armPID, SensorValue[poten]);
 	 			setEnabled(armPID, true);
 	 			setThresholds(armPID, -127, 127);
 	 		} else {
@@ -114,8 +127,8 @@ task usercontrol() {
 	  if (armPID.enabled != true) {
 	  	setArmSpeed(armSpeed);
 	  } else {
-	 		setArmSpeed(calculate(armPID, SensorValue[pot]));
-	  	setIntakeSpeed(intakeSpeed);
+	 		setArmSpeed(calculate(armPID, SensorValue[poten]));
 	  }
+	  	setIntakeSpeed(intakeSpeed);
 	}
 }
