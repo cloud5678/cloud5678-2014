@@ -74,6 +74,9 @@ task usercontrol()
    				 motor[backright] = 100;
    				 motor[backleft] = 100;
   			 }
+  	getJoystickSettings(joystick);     // update buttons and joysticks
+  		motor[frontleft] = joystick.joy1_x1;  // motorB's powerlevel is set to the left stick's current x-value
+  		motor[frontright] = joystick.joy1_-x1;
 }
 
 	  UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
