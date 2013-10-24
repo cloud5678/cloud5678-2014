@@ -63,21 +63,33 @@ task autonomous()
 task usercontrol()
 {
 	// User control code here, inside the loop
-
+	int threshold = 10;
 	while (true)
 	{
  	  getJoystickSettings(joystick);
- 	  	if(joystick.joy1_Buttons == 32)    // if Button 6 is pressed on joy1:
- 				 {
-   				 motor[frontright] = 100; // motors run at a power level of 100
-   				 motor[frontleft] = 100;
-   				 motor[backright] = 100;
-   				 motor[backleft] = 100;
-  			 }
-  	getJoystickSettings(joystick);     // update buttons and joysticks
-  		motor[frontleft] = joystick.joy1_x1;  // motorB's powerlevel is set to the left stick's current x-value
-  		motor[frontright] = joystick.joy1_-x1;
-}
+ 	      // update buttons and joysticks
+  		if(abs(joystick.joy1_y2 > threshold)
+  	{
+  			motor[frontright] = joystick.joy1_y2;
+  			motor[frontleft] = -joystick.joy1_y2;
+  	}
+		 else
+	 {
+				motor[frontright] = 0;
+				motor[frontleft] = 0;
+	 }
+
+
+	 if(abs(joystick.joy1_y1 > threshold)
+  	{
+  			motor[frontright] = -joystick.joy1_y2;
+  			motor[frontleft] = joystick.joy1_y2;
+  	}
+		 else
+	 {
+				motor[frontright] = 0;
+				motor[frontleft] = 0;
+	 }
 
 	  UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
 	}
