@@ -66,12 +66,15 @@ task usercontrol()
 
 	while (true)
 	{
-	  // This is the main execution loop for the user control program. Each time through the loop
-	  // your program should update motor + servo values based on feedback from the joysticks.
-
-	  // .....................................................................................
-	  // Insert user code here. This is where you use the joystick values to update your motors, etc.
-	  // .....................................................................................
+ 	  getJoystickSettings(joystick);
+ 	  	if(joystick.joy1_Buttons == 32)    // if Button 6 is pressed on joy1:
+ 				 {
+   				 motor[frontright] = 100; // motors run at a power level of 100
+   				 motor[frontleft] = 100;
+   				 motor[backright] = 100;
+   				 motor[backleft] = 100;
+  			 }
+}
 
 	  UserControlCodePlaceholderForTesting(); // Remove this function call once you have "real" code.
 	}
