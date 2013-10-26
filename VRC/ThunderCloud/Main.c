@@ -33,7 +33,7 @@ PIDController turnPID;
 
 const int ARMAX = 3800;
 const int ARMIN = 2000;
-*
+
 /*int pickSide()
 {
 	int side = -1;
@@ -81,8 +81,8 @@ int scaleInput(int a) {
 ///////////////////////////////////////////////////////////
 
 void pre_auton() {
-	init(armPID, 0, 0, 0);
-	init(turnPID, 0, 0, 0);
+	init(armPID, 0.564444, 0, 0);
+	init(turnPID, 0.267368, 0, 0);
 
 	SensorType[gyro] = sensorNone;
 	wait1Msec(1000);
@@ -120,7 +120,7 @@ task autonomous() {
 //	string a = "autonomous"
 //	displayString(a, a);
 	setIntakeSpeed(127);
-	wait10Msec(10);
+	wait10Msec(1000);
 	setIntakeSpeed(0);
 
 }
@@ -133,7 +133,7 @@ task usercontrol() {
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
 	  int intakeSpeed = a = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
-	  /*if (vexRT[Btn8R] == 1) {
+	  if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
 	 			setSetpoint(armPID, SensorValue[poten]);
 	 			setEnabled(armPID, true);
@@ -142,7 +142,7 @@ task usercontrol() {
 	 			setEnabled(armPID, false);
 	 		}
 		}
-	  if (vexRT[Btn8D] == 1) {
+	 /* if (vexRT[Btn8D] == 1) {
 			if (turnPID.enabled == true) {
 				setEnabled(turnPID, false);
 			} else {
