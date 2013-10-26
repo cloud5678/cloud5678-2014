@@ -1,14 +1,15 @@
 #pragma config(I2C_Usage, I2C1, i2cSensors)
-#pragma config(Sensor, in1,    poten,          sensorPotentiometer)
+#pragma config(Sensor, in1,    poten,          sensorNone)
 #pragma config(Sensor, in2,    gyro,           sensorGyro)
 #pragma config(Sensor, in3,    accel,          sensorAccelerometer)
+#pragma config(Sensor, in4,    potato,         sensorAnalog)
 #pragma config(Sensor, I2C_1,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Sensor, I2C_2,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
-#pragma config(Motor,  port5,           frontLeft,     tmotorVex393, openLoop)
+#pragma config(Motor,  port1,           armLeft,       tmotorVex393, openLoop)
 #pragma config(Motor,  port2,           backLeft,      tmotorVex393, openLoop, encoder, encoderPort, I2C_1, 1000)
 #pragma config(Motor,  port3,           frontRight,    tmotorVex393, openLoop, reversed)
 #pragma config(Motor,  port4,           backRight,     tmotorVex393, openLoop, reversed, encoder, encoderPort, I2C_2, 1000)
-#pragma config(Motor,  port1,           armLeft,       tmotorVex393, openLoop)
+#pragma config(Motor,  port5,           frontLeft,     tmotorVex393, openLoop)
 #pragma config(Motor,  port6,           armRight,      tmotorVex393, openLoop)
 #pragma config(Motor,  port7,           intakeLeft,    tmotorVex393, openLoop)
 #pragma config(Motor,  port8,           intakeRight,   tmotorVex393, openLoop, reversed)
@@ -25,11 +26,12 @@
 
 #include "Vex_Competition_Includes.c"
 #include "PIDController.c"
+#include "LCD.c"
 
 PIDController armPID;
 PIDController turnPID;
 
-const int ARMAX = 3812;
+const int ARMAX = 3800;
 const int ARMIN = 2000;
 
 int pickSide()
@@ -72,6 +74,8 @@ int scaleInput(int a) {
 	//return a * a;
 }
 
+
+
 ///////////////////////////////////////////////////////////
 // Robot Tasks
 ///////////////////////////////////////////////////////////
@@ -93,17 +97,37 @@ void pre_auton() {
 }
 task autonomous() {
 	// Autonomous
+	// setSetpoint(turnPID, [degrees x 10 (0 to 3600)] );
+	// setEnabled(turnPID); setDisabled(turnPID);
+	// driveArcade([127 to -127], 0);
+	// wait1Msec([time in msec]);
+	driveArcade(127, 0);
+	wait1Msec(4000);
+	driveArcade(0, 0);
+
+	setSetpoint(turnPID, 1270);
+	setEnabled(turnPID);
+	wait1Msec(1000);
+	setDisabled(turnPID);
+	driveArcade(0, 0);
+
+	driveArcade(-127, 0);
+	wait1Msec(4000);
+	driveArcade(0, 0);
+
+
+
+
 }
 int a;
 
 task usercontrol() {
 	// User control initialization
-
 	while (true) { // User control loop
 	  int driveX = scaleInput(vexRT[Ch4]);
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
-	  int intakeSpeed = a = 127*(vexRT[Btn5U]|vexRT[Btn5D]-vexRT[Btn6U]|vexRT[Btn6D]);
+	  int intakeSpeed = a = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
 	  if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
 	 			setSetpoint(armPID, SensorValue[poten]);
@@ -130,5 +154,5 @@ task usercontrol() {
 	 		setArmSpeed(calculate(armPID, SensorValue[poten]));
 	  }
 	  	setIntakeSpeed(intakeSpeed);
-	}
+		}
 }
