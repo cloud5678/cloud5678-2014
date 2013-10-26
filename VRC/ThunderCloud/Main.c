@@ -33,7 +33,7 @@ PIDController turnPID;
 
 const int ARMAX = 3800;
 const int ARMIN = 2000;
-*
+
 /*int pickSide()
 {
 	int side = -1;
@@ -119,12 +119,46 @@ task autonomous() {
 	driveArcade(0, 0);*/
 //	string a = "autonomous"
 //	displayString(a, a);
-	setIntakeSpeed(127);
-	wait10Msec(10);
+	setIntakeSpeed(127);			//drop balls
+	wait10Msec(7000);
 	setIntakeSpeed(0);
 
+	//setSetpoint(armPID,3200);	//raise arm
+	//setEnabled(armPID,true);
+	//wait1Msec(1000);
+	//setEnabled(armPID,false);
+	setArmSpeed(127);
+	wait1Msec(1000);
+	setArmSpeed(0);
+
+	driveArcade(127,0);				//drive forward
+	wait1Msec(2000);
+	driveArcade(0,0);
+
+	driveArcade(-127,0);			//drive back
+	wait1Msec(2000);
+	driveArcade(0,0);
+
+	//setSetpoint(turnPID,950);	//turn to the right 90
+	//setEnabled(turnPID,true);
+	//wait1Msec(1000);
+	//setEnabled(turnPID,false);
+	driveArcade(0,127);
+	wait1Msec(1000);
+	driveArcade(0,0);
+
+	//setSetpoint(turnPID,-950);//turn to the left 90
+	//setEnabled(turnPID,true);
+	//wait1Msec(1000);
+	//setEnabled(turnPID,false);
+	driveArcade(0,-127);
+	wait1Msec(1000);
+	driveArcade(0,0);
+
+	driveArcade(127,0);				//drive forward
+	wait1Msec(1000);
+	driveArcade(0,0);
 }
-int a;
 
 task usercontrol() {
 	// User control initialization
@@ -132,7 +166,7 @@ task usercontrol() {
 	  int driveX = scaleInput(vexRT[Ch4]);
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
-	  int intakeSpeed = a = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
+	  int intakeSpeed = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
 	  /*if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
 	 			setSetpoint(armPID, SensorValue[poten]);
