@@ -119,9 +119,7 @@ task autonomous() {
 	driveArcade(0, 0);*/
 //	string a = "autonomous"
 //	displayString(a, a);
-	setIntakeSpeed(127);			//drop balls
-	wait10Msec(7000);
-	setIntakeSpeed(0);
+
 
 	//setSetpoint(armPID,3200);	//raise arm
 	//setEnabled(armPID,true);
@@ -131,33 +129,39 @@ task autonomous() {
 	wait1Msec(1000);
 	setArmSpeed(0);
 
-	driveArcade(127,0);				//drive forward
-	wait1Msec(2000);
+	driveArcade(127,0);					//drive forward
+	wait1Msec(1500);
 	driveArcade(0,0);
 
-	driveArcade(-127,0);			//drive back
-	wait1Msec(2000);
+	driveArcade(-127,0);				//drive back
+	wait1Msec(1500);
 	driveArcade(0,0);
 
 	//setSetpoint(turnPID,950);	//turn to the right 90
 	//setEnabled(turnPID,true);
 	//wait1Msec(1000);
 	//setEnabled(turnPID,false);
-	driveArcade(0,127);
-	wait1Msec(1000);
-	driveArcade(0,0);
+	//driveArcade(0,127);
+	//wait1Msec(1000);
+	//driveArcade(0,0);
+
+	wait1Msec(3000);
 
 	//setSetpoint(turnPID,-950);//turn to the left 90
 	//setEnabled(turnPID,true);
 	//wait1Msec(1000);
 	//setEnabled(turnPID,false);
-	driveArcade(0,-127);
-	wait1Msec(1000);
-	driveArcade(0,0);
+	//driveArcade(0,-127);
+	//wait1Msec(1000);
+	//driveArcade(0,0);
 
 	driveArcade(127,0);				//drive forward
-	wait1Msec(1000);
+	wait1Msec(1500);
 	driveArcade(0,0);
+
+	setIntakeSpeed(127);				//drop buckie ball
+	wait10Msec(5000);
+	setIntakeSpeed(0);
 }
 
 task usercontrol() {
