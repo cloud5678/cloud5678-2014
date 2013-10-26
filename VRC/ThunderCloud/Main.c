@@ -81,8 +81,8 @@ int scaleInput(int a) {
 ///////////////////////////////////////////////////////////
 
 void pre_auton() {
-	init(armPID, 0, 0, 0);
-	init(turnPID, 0, 0, 0);
+	init(armPID, 0.564444, 0, 0);
+	init(turnPID, 0.267368, 0, 0);
 
 	SensorType[gyro] = sensorNone;
 	wait1Msec(1000);
@@ -176,8 +176,8 @@ task usercontrol() {
 	 			setEnabled(armPID, false);
 	 		}
 		}
-	  if (vexRT[Btn8D] == 1) {
-			if (turnPID.enabled == true) {
+	 /* if (vexRT[Btn8D] == 1) {
+			if (turnPID.enabled == true) {s
 				setEnabled(turnPID, false);
 			} else {
 				setEnabled(turnPID, true);
