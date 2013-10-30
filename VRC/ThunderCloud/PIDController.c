@@ -59,9 +59,9 @@ int calculate(PIDController controller, int input) {
 	controller.error = controller.setpoint - input;
 	controller.totalError += controller.error;
 
-	int output = controller.kP * controller.error +
-               controller.kI * controller.totalError +
-               controller.kD * (controller.prevError - controller.error);
+	int output = (int) (controller.kP * (float) (controller.error) +
+               controller.kI * (float) (controller.totalError) +
+               controller.kD * (float) ((controller.prevError - controller.error)));
 
 	if (controller.maxOutput != 0 && controller.minOutput != 0) {
 		if (output > controller.maxOutput) {

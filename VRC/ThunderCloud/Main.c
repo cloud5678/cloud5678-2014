@@ -59,7 +59,7 @@ const int ARMIN = 2000;
  	return side;
 }*/
 
-void driveArcade(int x, int y) {
+void driveArcade(int y, int x) {
 	motor[frontLeft] = motor[backLeft] = y + x;
 	motor[frontRight] = motor[backRight] = y - x;
 }
@@ -125,16 +125,36 @@ task autonomous() {
 	//setEnabled(armPID,true);
 	//wait1Msec(1000);
 	//setEnabled(armPID,false);
-	setArmSpeed(127);
-	wait1Msec(1000);
-	setArmSpeed(0);
+	setIntakeSpeed(-127);				//drop buckie ball
 
-	driveArcade(127,0);					//drive forward
-	wait1Msec(1500);
+	setArmSpeed(100);
+	wait1Msec(1000);
+	setArmSpeed(5);
+
+	driveArcade(70,0);					//drive forward
+	wait1Msec(1100);
 	driveArcade(0,0);
 
-	driveArcade(-127,0);				//drive back
-	wait1Msec(1500);
+	setIntakeSpeed(0);
+	setArmSpeed(20);
+
+	wait1Msec(1000);
+
+	driveArcade(-70,0);				//drive back
+	wait1Msec(1200);
+	driveArcade(0,0);
+
+
+	wait1Msec(5000);
+
+	driveArcade(70,0);					//drive forward
+	wait1Msec(1300);
+	driveArcade(0,0);
+
+	wait1Msec(1000);
+
+	driveArcade(-70,0);				//drive back
+	wait1Msec(1300);
 	driveArcade(0,0);
 
 	//setSetpoint(turnPID,950);	//turn to the right 90
@@ -145,7 +165,7 @@ task autonomous() {
 	//wait1Msec(1000);
 	//driveArcade(0,0);
 
-	wait1Msec(3000);
+	/*wait1Msec(3000);
 
 	//setSetpoint(turnPID,-950);//turn to the left 90
 	//setEnabled(turnPID,true);
@@ -157,11 +177,11 @@ task autonomous() {
 
 	driveArcade(127,0);				//drive forward
 	wait1Msec(1500);
-	driveArcade(0,0);
+	driveArcade(0,0);*/
 
-	setIntakeSpeed(127);				//drop buckie ball
+/*	setIntakeSpeed(127);				//drop buckie ball
 	wait10Msec(5000);
-	setIntakeSpeed(0);
+	setIntakeSpeed(0);*/
 }
 
 task usercontrol() {
@@ -194,7 +214,7 @@ task usercontrol() {
 		sprintf(gyroString, "%3f%c", SensorValue[gyro]);
 		displayString(potenString, gyroString);*/
 
-	  driveArcade(turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : driveX, driveY);
+	  driveArcade(turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : driveY, driveX);
 	  setArmSpeed(armPID.enabled ? calculate(armPID, SensorValue[poten]) : armSpeed);
 	  setIntakeSpeed(intakeSpeed);
 	}

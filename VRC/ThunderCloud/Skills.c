@@ -107,24 +107,35 @@ task autonomous() {
 	/*driveArcade(127, 0);
 	wait1Msec(4000);
 	driveArcade(0, 0);
-
+*/string a = "autonomous";
+	displayString(a, a);
+	wait10Msec(5000);
 	setSetpoint(turnPID, 1270);
-	setEnabled(turnPID);
-	wait1Msec(1000);
-	setDisabled(turnPID);
+	setEnabled(turnPID, true);
+	for (int i = 0; i < 1000; i++) {
+		string ee = 'a';
+		string aa = 'a';
+		sprintf(ee, "%1f%c", i);
+		displayString(aa,ee);
+	  driveArcade(calculate(turnPID, SensorValue[gyro]), 0);
+	  wait1Msec(1);
+	}
+	setEnabled(turnPID, false);
 	driveArcade(0, 0);
-
+/*
 	driveArcade(-127, 0);
 	wait1Msec(4000);
 	driveArcade(0, 0);*/
 //	string a = "autonomous"
 //	displayString(a, a);
-	setIntakeSpeed(127);
-	wait10Msec(10);
-	setIntakeSpeed(0);
-
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////
+	/*setSetpoint(turnPID, 0);
+	setEnabled(turnPID, true);
+	setSetpoint(turnPID, 45);
+	0*/
 }
-int a;
 
 task usercontrol() {
 	// User control initialization
@@ -132,7 +143,7 @@ task usercontrol() {
 	  int driveX = scaleInput(vexRT[Ch4]);
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
-	  int intakeSpeed = a = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
+	  int intakeSpeed = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
 	  /*if (vexRT[Btn8R] == 1) {
 	  	if (armPID.enabled != true) {
 	 			setSetpoint(armPID, SensorValue[poten]);
