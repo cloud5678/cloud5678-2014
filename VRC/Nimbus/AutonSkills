@@ -152,6 +152,74 @@ task autonomous()
 		motor[leftArm2]= 80;
 		motor[rightArm2] = 80;
 	}
+		//Lowers arm. (Total time: 16.375 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+		motor[leftArm] = -40;
+		motor[rightArm] = -40;
+		motor[leftArm2]= -40;
+		motor[rightArm2] = -40;
+	}
+	//Turns to the right 165 degrees. (Total time: 17.75 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 1375)
+	{
+	motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = -127;
+  motor[rightRear] = -127;
+ }
+	//Opens intake, drives forward to pick up two small balls. (Total time: 22.75 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 5000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftIntake] = 127;
+  motor[rightIntake] = 127;
+	}
+	//Turns to the right 180 degrees. (Total time: 24.25 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 1500)
+	{
+	motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = -127;
+  motor[rightRear] = -127;
+ }
+ 	//Drives forward to goal. (Total time: 29.25 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 5000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+}
+//Lifts arm. (Total time: 30.25 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+		motor[leftArm] = 80;
+		motor[rightArm] = 80;
+		motor[leftArm2]= 80;
+		motor[rightArm2] = 80;
+	}
+	//Deposits balls in goal. (Total time: 31.75 seconds)
+	ClearTimer(T1);
+	while(time1[T1] < 1500)
+	{
+		motor[leftIntake] = 127;
+		motor[rightIntake] = 127;
+		motor[leftArm] = 80;
+		motor[rightArm] = 80;
+		motor[leftArm2]= 80;
+		motor[rightArm2] = 80;
+	}
+	
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
