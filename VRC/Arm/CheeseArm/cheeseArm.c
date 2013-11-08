@@ -1,18 +1,18 @@
-#pragma config(Sensor, in1,   Base,          	sensorNone)
-#pragma config(Sensor, in2,   Shoulder,       sensorNone)
-#pragma config(Sensor, in3,   Elbow,          sensorNone)
-#pragma config(Sensor, in4,   Wrist,          sensorNone)
-#pragma config(Sensor, in5,		Bumper,					sensorTouch)
-#pragma config(Motor, port1,	baseMotor1, 			tmotorVex393,	openLoop)
-#pragma config(Motor, port10,	baseMotor2, 			tmotorVex393,	openLoop, reversed)
-#pragma config(Motor, port2,	shoulderMotor1, 	tmotorVex393,	openLoop)
-#pragma config(Motor, port3,	shoulderMotor2, 	tmotorVex393,	openLoop, reversed)
-#pragma config(Motor, port4,	elbowMotor1, 			tmotorVex393,	openLoop)
-#pragma config(Motor, port5,	elbowMotor2, 			tmotorVex393,	openLoop, reversed)
-#pragma config(Motor, port6,	wristMotorVert1,	tmotorVex269,	openLoop)
-#pragma config(Motor, port7,	wristMotorVert2,	tmotorVex269,	openLoop,	reversed)
-#pragma config(Motor, port8,	wristMotorRot,		tmotorVex269,	openLoop)
-#pragma config(Motor, port9,	clawMotor,				tmotorVex269,	openLoop)
+#pragma config(Sensor, in1,   			Base,          	sensorNone)
+#pragma config(Sensor, in2,  				Shoulder,       sensorNone)
+#pragma config(Sensor, in3,   			Elbow,          sensorNone)
+#pragma config(Sensor, in4,   			Wrist,          sensorNone)
+#pragma config(Sensor, in5,					Bumper,					sensorTouch)
+#pragma config(Motor, port1,				baseMotor1, 			tmotorVex393,	openLoop)
+#pragma config(Motor, port10,				baseMotor2, 			tmotorVex393,	openLoop, reversed)
+#pragma config(Motor, port2,				shoulderMotor1, 	tmotorVex393,	openLoop)
+#pragma config(Motor, port3,				shoulderMotor2, 	tmotorVex393,	openLoop, reversed)
+#pragma config(Motor, port4,				elbowMotor1, 			tmotorVex393,	openLoop)
+#pragma config(Motor, port5,				elbowMotor2, 			tmotorVex393,	openLoop, reversed)
+#pragma config(Motor, port6,				wristMotorVert1,	tmotorVex393,	openLoop)
+#pragma config(Motor, port7,				wristMotorVert2,	tmotorVex393,	openLoop,	reversed)
+#pragma config(Motor, port8,				wristServo,				tmotorVex269, openLoop)
+#pragma config(Motor, port9,				clawServo,				tmotorVex269, openLoop)
 
 #pragma platform(VEX)
 
@@ -109,7 +109,7 @@ void setWristVertValue(int val)
 }
 void setWristRotValue(int val)
 {
-		motor[wristMotorRot] =  val;
+		motor[wristServo] = val;
 }
 void setBaseValue(int val)
 {
@@ -117,7 +117,7 @@ void setBaseValue(int val)
 }
 void setClawValue(int val)
 {
-	 motor[clawMotor] = val;
+	 	motor[clawServo] = val;
 }
 
 
@@ -155,23 +155,23 @@ void turnBase()
 
 task autonomous()
 {
-		shoulderZero = SensorValue[Shoulder];
-		elbowZero 	 = SensorValue[Elbow];
-		wristZero		 = SensorValue[Wrist];
-		int x = 0;
-		int y = bowlDist;
-		int count = 0;
-		while (true)
-		{
-				if(SensorValue(Bumper)==1)
-				{
-					break;
-				}
-				bendArm(x,y);
-				x = bowlDiam/2*sin(count);
-				y = (-1*(bowlDiam/2))*cos(count);
-				count++;
-		}
+		//shoulderZero = SensorValue[Shoulder];
+		//elbowZero 	 = SensorValue[Elbow];
+		//wristZero		 = SensorValue[Wrist];
+		//int x = 0;
+		//int y = bowlDist;
+		//int count = 0;
+		//while (true)
+		//{
+		//		if(SensorValue(Bumper)==1)
+		//		{
+		//			break;
+		//		}
+		//		bendArm(x,y);
+		//		x = bowlDiam/2*sin(count);
+		//		y = (-1*(bowlDiam/2))*cos(count);
+		//		count++;
+		//}
 }
 
 task usercontrol()
@@ -183,6 +183,8 @@ task usercontrol()
 				setElbowValue(vexRT[Ch1]/12.7);
 				setWristVertValue(vexRT[Ch3]/12.7);
 				setWristRotValue(vexRT[Ch4]/12.7);
-				setClawValue(30*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D])));
+				//setClawValue(30*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D])));
+
+
 		}
 }
