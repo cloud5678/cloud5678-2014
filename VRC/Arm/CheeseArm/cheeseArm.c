@@ -183,7 +183,7 @@ task usercontrol()
 				setElbowValue(vexRT[Ch1]/12.7);
 				setWristVertValue(vexRT[Ch3]/12.7);
 				setWristRotValue(vexRT[Ch4]/12.7);
-				//setClawValue(30*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D])));
+				setClawValue(30*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D])));
 
 
 		}
