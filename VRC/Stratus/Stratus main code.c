@@ -48,7 +48,7 @@ void pre_auton()
 
 task autonomous()
 {
-        while (SensorValue(touchSensor) == 1)
+        if (SensorValue(touchSensor) == 1)
         {
         //Hits first friendly large ball into goal zone. (Total time: 1 second)
         ClearTimer(T1);
@@ -186,7 +186,7 @@ task autonomous()
                 motor[rightRear] = 127;
         }
 }
-        while (SensorValue(touchSensor) == 1)
+        if (SensorValue(touchSensor) == 1)
         {
                 //Hits first friendly large ball into goal zone. (Total time: 1 second)
         ClearTimer(T1);
