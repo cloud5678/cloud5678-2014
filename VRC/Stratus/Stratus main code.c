@@ -48,11 +48,11 @@ void pre_auton()
 
 task autonomous()
 {
-        if (SensorValue(touchSensor) == 1)
-        {
+   if (SensorValue(touchSensor) == 1)
+   {
         //Hits first friendly large ball into goal zone. (Total time: 1 second)
         ClearTimer(T1);
-        while(time1[T1] < 1000)
+        while(time1[T1] < 2000)
         {
   motor[leftFront] = 127;
   motor[leftRear] = 127;
@@ -60,273 +60,38 @@ task autonomous()
   motor[rightRear] = 127;
   motor[leftArm] = 50;
   motor[rightArm] = 50;
+  			}
+  			ClearTimer(T1);
+  			while(time1[T1] < 700)
+  motor[leftIntake] = -127;
+  motor[rightIntake] = -127;
         }
-        //Keeps arm lifted, turns to the right 90 degrees. (Total time: 1.75 seconds)
         ClearTimer(T1);
-        while(time1[T1] < 750)
+        while(time1[T1] < 700)
         {
-        motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = -127;
-  motor[rightRear] = -127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        //Hits second friendly large ball into goal zone. (Total time: 2.75 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        //Lowers arm in prep for going under barrier, turns to the left 90 degrees. (Total time: 3.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 750)
-        {
-  motor[leftFront] = -127;
-  motor[leftRear] = -127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
   motor[leftArm] = -50;
-  motor[rightArm] = -50;
-        }
-        //Moves up to the goal. (Total time: 4.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-        }
-        //Lifts arm. (Total time: 5.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 80;
-                motor[rightArm] = 80;
-        }
-        //Deposits preloads in goal. (Total time: 7 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1500)
-        {
-                motor[leftIntake] = 127;
-                motor[rightIntake] = 127;
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-        }
-        //Turns to the right 120 degrees. (Total time: 8 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = -127;
-                motor[rightRear] = -127;
-        }
-        //Hits enemy large ball into middle zone. (Total time: 9.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1500)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Turns to the left 60 degrees. (Total time: 10 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 500)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = -127;
-                motor[leftRear] = -127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Hits other enemy large ball into middle zone. (Total time: 11 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Turns to the right 135 degrees and lowers arm. (Total time: 12.125 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1125)
-        {
-                motor[leftArm] = -40;
-                motor[rightArm] = -40;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = -127;
-                motor[rightRear] = -127;
-        }
-        //Travels as far as possible southwest while attempting to pick up more buckyballs. (Time out)
-        ClearTimer(T1);
-        while(time1[T1] < 2875)
-        {
-                motor[leftIntake] = 127;
-                motor[rightIntake] = 127;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-}
-        if (SensorValue(touchSensor) == 1)
-        {
-                //Hits first friendly large ball into goal zone. (Total time: 1 second)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        //Keeps arm lifted, turns to the left 90 degrees. (Total time: 1.75 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 750)
-        {
-        motor[leftFront] = -127;
-  motor[leftRear] = -127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        //Hits second friendly large ball into goal zone. (Total time: 2.75 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        //Lowers arm in prep for going under barrier, turns to the right 90 degrees. (Total time: 3.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 750)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = -127;
-  motor[rightRear] = -127;
-  motor[leftArm] = -50;
-  motor[rightArm] = -50;
-        }
-        //Moves up to the goal. (Total time: 4.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-        }
-        //Lifts arm. (Total time: 5.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-        }
-        //Deposits preloads in goal. (Total time: 7 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1500)
-        {
-                motor[leftIntake] = 127;
-                motor[rightIntake] = 127;
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-        }
-        //Turns to the left 120 degrees. (Total time: 8 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = -127;
-                motor[leftRear] = -127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Hits enemy large ball into middle zone. (Total time: 9.5 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1500)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Turns to the right 60 degrees. (Total time: 10 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 500)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = -127;
-                motor[rightRear] = -127;
-        }
-        //Hits other enemy large ball into middle zone. (Total time: 11 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1000)
-        {
-                motor[leftArm] = 50;
-                motor[rightArm] = 50;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Turns to the left 135 degrees and lowers arm. (Total time: 12.125 seconds)
-        ClearTimer(T1);
-        while(time1[T1] < 1125)
-        {
-                motor[leftArm] = -40;
-                motor[rightArm] = -40;
-                motor[leftFront] = -127;
-                motor[leftRear] = -127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        //Travels as far as possible southeast while attempting to pick up more buckyballs. (Time out)
-        ClearTimer(T1);
-        while(time1[T1] < 2875)
-        {
-                motor[leftIntake] = 127;
-                motor[rightIntake] = 127;
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
-        }
-        }
-}
+	motor[rightArm] = -50;
+      }
+  		 ClearTimer(T1);
+   }
 
-/////////////////////////////////////////////////////////////////////////////////////////
+   if (SensorValue(touchSensor) == 1)
+     {
+        //Hits first friendly large ball into goal zone. (Total time: 1 second)
+        ClearTimer(T1);
+        while(time1[T1] < 2000)
+        {
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+  motor[leftArm] = 50;
+  motor[rightArm] = 50;
+        }
+        ClearTimer(T1);
+      }
+
+        /////////////////////////////////////////////////////////////////////////////////////////
 //
 //                                 User Control Task
 //
