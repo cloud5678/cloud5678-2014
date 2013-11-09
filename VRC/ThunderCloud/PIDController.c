@@ -30,9 +30,9 @@
 typedef struct {
 	bool enabled;
 	float kP, kI, kD;
-	int setpoint;
-	int maxOutput, minOutput;
-	int error, totalError, prevError;
+	float setpoint;
+	float maxOutput, minOutput;
+	float error, totalError, prevError;
 } PIDController;
 
 void init(PIDController controller, float kP, float kI, float kD) {
@@ -47,23 +47,23 @@ void setSetpoint(PIDController controller, int setpoint) {
 }
 void setThresholds(PIDController controller, int max, int min) {
 	controller.maxOutput = max;
-	controller.minOutput = min;
+		controller.minOutput = min;
 }
 void setEnabled(PIDController controller, bool en) {
 	controller.enabled = en;
 }
-int calculate(PIDController controller, int input) {
+float calculate(PIDController controller, float input) {
 	if (!controller.enabled) {
 		return 0.0;
 	}
 	controller.error = controller.setpoint - input;
 	controller.totalError += controller.error;
 
-	int output = (int) (controller.kP * (float) (controller.error) +
+	float output = (controller.kP * (float) (controller.error) +
                controller.kI * (float) (controller.totalError) +
                controller.kD * (float) ((controller.prevError - controller.error)));
 
-	if (controller.maxOutput != 0 && controller.minOutput != 0) {
+	if (controller.maxOutput != 0.0 && controller.minOutput != 0.0) {
 		if (output > controller.maxOutput) {
 			output = controller.maxOutput;
 		}

@@ -2,6 +2,7 @@
 #pragma config(Sensor, in1,    accel,          sensorNone)
 #pragma config(Sensor, in2,    poten,          sensorNone)
 #pragma config(Sensor, in3,    gyro,           sensorGyro)
+#pragma config(Sensor, in4,    powerexp,       sensorAnalog)
 #pragma config(Sensor, I2C_1,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Sensor, I2C_2,  ,               sensorQuadEncoderOnI2CPort,    , AutoAssign)
 #pragma config(Motor,  port1,           armRight,      tmotorVex393, openLoop)
@@ -25,39 +26,15 @@
 
 #include "Vex_Competition_Includes.c"
 #include "PIDController.c"
-#include "LCD.c"
 #include "Sound.c"
+#include "LCD.c"
 
 PIDController armPID;
 PIDController turnPID;
 
 const int ARMAX = 3800;
 const int ARMIN = 2000;
-
-/*int pickSide()
-{
-	int side = -1;
-	while (true)
-	{
-		clearLCDLine(0);
-	 	clearLCDLine(1);
-	 	displayLCDPos(0, 0);
-	 	displayLCDCenteredString(0,"Which Side?");
-	 	displayLCDPos(1, 0);
-	 	displayNextLCDString("Left       Right");
-	 	if(nLCDButtons == 1)
-	 	{
-	 		side = 0;
-	 		break;
-		}
-		else if(nLCDButtons == 4)
-		{
-			side = 1;
-			break;
-		}
-	}
- 	return side;
-}*/
+int autonomousChoice = 0;
 
 void driveArcade(int y, int x) {
 	motor[frontLeft] = motor[backLeft] = y + x;
@@ -71,10 +48,7 @@ void setIntakeSpeed(int speed) {
 }
 int scaleInput(int a) {
 	return a;
-	//return a * a;
 }
-
-
 
 ///////////////////////////////////////////////////////////
 // Robot Tasks
@@ -91,41 +65,16 @@ void pre_auton() {
 	SensorValue[gyro]=0;
 	SensorFullCount[gyro]=3600;
 
+	StartTask(LCDOverlord);
+
 	// Autonomous initialization
   bStopTasksBetweenModes = true;
-
-  StartTask(startLCD);
 }
+
 task autonomous() {
 	// Autonomous
-	//playMissionImpossible();
 
-	// setSetpoint(turnPID, [degrees x 10 (0 to 3600)] );
-	// setEnabled(turnPID); setDisabled(turnPID);
-	// driveArcade([127 to -127], 0);
-	// wait1Msec([time in msec]);
-	/*driveArcade(127, 0);
-	wait1Msec(4000);
-	driveArcade(0, 0);
-
-	setSetpoint(turnPID, 1270);
-	setEnabled(turnPID);
-	wait1Msec(1000);
-	setDisabled(turnPID);
-	driveArcade(0, 0);
-
-	driveArcade(-127, 0);
-	wait1Msec(4000);
-	driveArcade(0, 0);*/
-//	string a = "autonomous"
-//	displayString(a, a);
-
-
-	//setSetpoint(armPID,3200);	//raise arm
-	//setEnabled(armPID,true);
-	//wait1Msec(1000);
-	//setEnabled(armPID,false);
-	setIntakeSpeed(-127);				//drop buckie ball
+	setIntakeSpeed(127);				//drop buckie ball
 
 	setArmSpeed(100);
 	wait1Msec(1000);
@@ -144,7 +93,6 @@ task autonomous() {
 	wait1Msec(1200);
 	driveArcade(0,0);
 
-
 	wait1Msec(5000);
 
 	driveArcade(70,0);					//drive forward
@@ -156,32 +104,6 @@ task autonomous() {
 	driveArcade(-70,0);				//drive back
 	wait1Msec(1300);
 	driveArcade(0,0);
-
-	//setSetpoint(turnPID,950);	//turn to the right 90
-	//setEnabled(turnPID,true);
-	//wait1Msec(1000);
-	//setEnabled(turnPID,false);
-	//driveArcade(0,127);
-	//wait1Msec(1000);
-	//driveArcade(0,0);
-
-	/*wait1Msec(3000);
-
-	//setSetpoint(turnPID,-950);//turn to the left 90
-	//setEnabled(turnPID,true);
-	//wait1Msec(1000);
-	//setEnabled(turnPID,false);
-	//driveArcade(0,-127);
-	//wait1Msec(1000);
-	//driveArcade(0,0);
-
-	driveArcade(127,0);				//drive forward
-	wait1Msec(1500);
-	driveArcade(0,0);*/
-
-/*	setIntakeSpeed(127);				//drop buckie ball
-	wait10Msec(5000);
-	setIntakeSpeed(0);*/
 }
 
 task usercontrol() {
@@ -191,31 +113,21 @@ task usercontrol() {
 	  int driveY = scaleInput(vexRT[Ch3]);
 	  int armSpeed = vexRT[Ch2];
 	  int intakeSpeed = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
-	  /*if (vexRT[Btn8R] == 1) {
-	  	if (armPID.enabled != true) {
-	 			setSetpoint(armPID, SensorValue[poten]);
-	 			setEnabled(armPID, true);
-	 			setThresholds(armPID, -127, 127);
-	 		} else {
-	 			setEnabled(armPID, false);
-	 		}
-		}
-	 /* if (vexRT[Btn8D] == 1) {
-			if (turnPID.enabled == true) {s
-				setEnabled(turnPID, false);
-			} else {
-				setEnabled(turnPID, true);
-				setSetpoint(turnPID, SensorValue[gyro]);
-				setThresholds(turnPID, -127, 127);
-			}
-		}*/
-		/*string potenString, gyroString;
-		sprintf(potenString, "%3f%c", SensorValue[poten]);
+/*		string potenString, gyroString;
+s		sprintf(potenString, "%3f%c", SensorValue[poten]);
 		sprintf(gyroString, "%3f%c", SensorValue[gyro]);
 		displayString(potenString, gyroString);*/
 
-	  driveArcade(turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : driveY, driveX);
-	  setArmSpeed(armPID.enabled ? calculate(armPID, SensorValue[poten]) : armSpeed);
+		if (SensorValue[poten] > ARMAX) armSpeed = 0; // Limit the Poten from dying.
+
+		driveX = turnPID.enabled ? calculate(turnPID, SensorValue[gyro]) : driveX;
+		armSpeed = armPID.enabled ? calculate(armPID, SensorValue[poten]) : armSpeed;
+
+		if (abs(driveY) < 5) driveY = 0; // Deadband
+		if (abs(driveX) < 5) driveX = 0;
+
+	  driveArcade(driveY, driveX);
+	  setArmSpeed(armSpeed);
 	  setIntakeSpeed(intakeSpeed);
 	}
 }
