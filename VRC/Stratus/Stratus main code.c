@@ -27,8 +27,10 @@
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 
+
 void pre_auton()
 {
+
   // Set bStopTasksBetweenModes to false if you want to keep user created tasks running between
   // Autonomous and Tele-Op modes. You will need to manage all user created tasks if set to false.
   bStopTasksBetweenModes = true;
@@ -46,53 +48,65 @@ void pre_auton()
 //
 /////////////////////////////////////////////////////////////////////////////////////////
 
-task autonomous()
+ task autonomous()
 {
-   if (SensorValue(touchSensor) == 1)
-   {
         //Hits first friendly large ball into goal zone. (Total time: 1 second)
-        ClearTimer(T1);
-        while(time1[T1] < 2000)
-        {
+/*
+motor[leftFront] = 127;
+  motor[leftRear] = 127;
+  motor[rightFront] = 127;
+  motor[rightRear] = 127;
+wait10Msec(2500) ;
+  motor[leftFront] = 0;
+  motor[leftRear] = 0;
+  motor[rightFront] = 0;
+  motor[rightRear] = 0;
+  				motor[leftIntake] = -127;
+  				motor[rightIntake] = -127;
+ wait1Msec(200);
+ 	motor[leftIntake] = 127;
+ 	motor[rightIntake] = 127;
+ wait1Msec(200);
+  motor[leftIntake] = 0;
+  motor[rightIntake] = 0;
+  motor[leftFront] = -127;
+  motor[leftRear] = -127;
+  motor[rightFront] = -127;
+  motor[rightRear] = -127;
+ wait10Msec(250);
+    motor[leftFront] = 0;
+  motor[leftRear] = 0;
+  motor[rightFront] = 0;
+  motor[rightRear] = 0;
+  while(SensorValue[touchSensor] != 1)
+        	{}
+wait10Msec(30);//Hits first friendly large ball into goal zone. (Total time: 1 second)
+	motor[leftArm] = 80;
+  motor[rightArm] = 80;
+wait10Msec(100);
+  motor[rightArm]= 0;
+  motor[leftArm] = 0;
   motor[leftFront] = 127;
   motor[leftRear] = 127;
   motor[rightFront] = 127;
   motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-  			}
-  			ClearTimer(T1);
-  			while(time1[T1] < 700)
-  motor[leftIntake] = -127;
-  motor[rightIntake] = -127;
-        }
-        ClearTimer(T1);
-        while(time1[T1] < 700)
-        {
-  motor[leftArm] = -50;
-	motor[rightArm] = -50;
-      }
-  		 ClearTimer(T1);
-   }
+wait10Msec(300);
+  motor[leftFront] = 0;
+  motor[leftRear] = 0;
+  motor[rightFront] = 0;
+  motor[rightRear] = 0;
+  motor[rightArm] = -80;
+  motor[leftArm] = -80;
+ StartTask(usercontrol);
+ */
 
-   if (SensorValue(touchSensor) == 1)
-     {
-        //Hits first friendly large ball into goal zone. (Total time: 1 second)
-        ClearTimer(T1);
-        while(time1[T1] < 2000)
-        {
-  motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
-  motor[leftArm] = 50;
-  motor[rightArm] = 50;
-        }
-        ClearTimer(T1);
-      }
+  }
+
+
 
         /////////////////////////////////////////////////////////////////////////////////////////
 //
+
 //                                 User Control Task
 //
 // This task is used to control your robot during the user control phase of a VEX Competition.
@@ -102,9 +116,8 @@ task autonomous()
 
 task usercontrol()
 
-        // User control code here, inside the loop
-{        while (true)
-        {
+{
+
           // This is the main execution loop for the user control program. Each time through the loop
           // your program should update motor + servo values based on feedback from the joysticks.
 
@@ -145,4 +158,3 @@ task usercontrol()
                         motor[leftRear] = (vexRT[Ch2] - vexRT[Ch1]);
                         motor[leftFront]= (vexRT[Ch2] - vexRT[Ch1]);
                }
-}
