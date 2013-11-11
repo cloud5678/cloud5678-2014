@@ -51,7 +51,7 @@ void pre_auton()
  task autonomous()
 {
         //Hits first friendly large ball into goal zone. (Total time: 1 second)
-/*
+
 motor[leftFront] = 127;
   motor[leftRear] = 127;
   motor[rightFront] = 127;
@@ -98,7 +98,7 @@ wait10Msec(300);
   motor[rightArm] = -80;
   motor[leftArm] = -80;
  StartTask(usercontrol);
- */
+
 
   }
 
@@ -115,8 +115,11 @@ wait10Msec(300);
 /////////////////////////////////////////////////////////////////////////////////////////
 
 task usercontrol()
-
-{
+	{        while (true)
+        {
+  if(SensorValue[touchSensor] != 1)
+	{StartTask(autonomous);
+		}
 
           // This is the main execution loop for the user control program. Each time through the loop
           // your program should update motor + servo values based on feedback from the joysticks.
@@ -158,3 +161,4 @@ task usercontrol()
                         motor[leftRear] = (vexRT[Ch2] - vexRT[Ch1]);
                         motor[leftFront]= (vexRT[Ch2] - vexRT[Ch1]);
                }
+}
