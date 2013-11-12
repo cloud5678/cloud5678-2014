@@ -476,15 +476,15 @@ task usercontrol()
 		{
 			motor[leftFront] = (vexRT[Ch2] + vexRT[Ch1]);
 			motor[leftRear] = (vexRT[Ch2] + vexRT[Ch1]);
-			motor[rightFront] = (vexRT[Ch2] - vexRT[Ch1]);
-			motor[rightRear]= (vexRT[Ch2] - vexRT[Ch1]);
+			motor[rightFront] = 9/10*(vexRT[Ch2] - vexRT[Ch1]);
+			motor[rightRear]= 9/10*(vexRT[Ch2] - vexRT[Ch1]);
 		}
 		else
 		{
 			motor[leftFront] = vexRT[Ch2];
 			motor[leftRear] = vexRT[Ch2];
-			motor[rightFront] = vexRT[Ch2];
-			motor[rightRear]= vexRT[Ch2];
+			motor[rightFront] = 9/10*vexRT[Ch2];
+			motor[rightRear]= 9/10*vexRT[Ch2];
 		}
 	}
 }
