@@ -50,21 +50,74 @@ void pre_auton()
 
 task autonomous()
 {
-
-	{
+  //if (SensorValue(touchSensor) == 0)
+  //{
 	//Hits first friendly large ball into goal zone. (Total time: 1 second)
+
 	ClearTimer(T1);
 	while(time1[T1] < 1000)
 	{
   motor[leftFront] = 127;
   motor[leftRear] = 127;
-  motor[rightFront] = 127;
+    motor[rightFront] = 127;
   motor[rightRear] = 127;
-  motor[leftArm] = 80;
-  motor[rightArm] = 80;
-  motor[leftArm2] = 80;
-  motor[rightArm2] = 80;
+    motor[leftArm] = 60;
+  motor[rightArm] = 60;
+  motor[leftArm2] = 60;
+  motor[rightArm2] = 60;
 	}
+	//5 point code. Confirmed to work for 5+, 10+ potential.
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+  motor[leftFront] = -127;
+  motor[leftRear] = -127;
+    motor[rightFront] = -127;
+  motor[rightRear] = -127;
+    motor[leftArm] = -50;
+  motor[rightArm] = -50;
+  motor[leftArm2] = -50;
+  motor[rightArm2] = -50;
+	}
+	ClearTimer(T1);
+	while(time1[T1] < 5000)
+	{
+  motor[leftFront] = 0;
+  motor[leftRear] = 0;
+    motor[rightFront] = 0;
+  motor[rightRear] = 0;
+    motor[leftArm] = 0;
+  motor[rightArm] = 0;
+  motor[leftArm2] = 0;
+  motor[rightArm2] = 0;
+  motor[leftIntake] = 0;
+		motor[rightIntake] = 0;
+	}
+		ClearTimer(T1);
+	while(time1[T1] < 2000)
+	{
+  motor[leftFront] = 127;
+  motor[leftRear] = 127;
+    motor[rightFront] = 127;
+  motor[rightRear] = 127;
+    motor[leftArm] = 45;
+  motor[rightArm] = 45;
+  motor[leftArm2] = 45;
+  motor[rightArm2] = 45;
+	}
+	motor[leftFront] = 0;
+  motor[leftRear] = 0;
+    motor[rightFront] = 0;
+  motor[rightRear] = 0;
+    motor[leftArm] = 0;
+  motor[rightArm] = 0;
+  motor[leftArm2] = 0;
+  motor[rightArm2] = 0;
+  motor[leftIntake] = 0;
+		motor[rightIntake] = 0;
+}
+	//15 point + enemy ball middle zone. Currently does not work, needs testing.
+	/*
 	//Keeps arm lifted, turns to the right 90 degrees. (Total time: 1.75 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 750)
@@ -370,7 +423,7 @@ task autonomous()
 		motor[rightRear] = 127;
 	}
 	}
-}
+}*/
 
 /////////////////////////////////////////////////////////////////////////////////////////
 //
