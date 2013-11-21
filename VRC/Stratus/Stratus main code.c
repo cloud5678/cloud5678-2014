@@ -51,8 +51,8 @@ void pre_auton()
  task autonomous()
 {
         //Hits first friendly large ball into goal zone. (Total time: 1 second)
-while(SensorValue[touchSensor] != 1)
-        	{}
+if(SensorValue[touchSensor] == 1)
+{
 motor[leftFront] = 127;
   motor[leftRear] = 127;
   motor[rightFront] = 127;
@@ -79,8 +79,8 @@ wait10Msec(2500) ;
   motor[leftRear] = 0;
   motor[rightFront] = 0;
   motor[rightRear] = 0;
-  while(SensorValue[touchSensor] != 1)
-        	{}
+
+
 wait10Msec(30);//Hits first friendly large ball into goal zone. (Total time: 1 second)
 	motor[leftArm] = 80;
   motor[rightArm] = 80;
@@ -98,9 +98,8 @@ wait10Msec(300);
   motor[rightRear] = 0;
   motor[rightArm] = -80;
   motor[leftArm] = -80;
- StartTask(usercontrol);
-
-
+  }
+   StartTask(usercontrol);
   }
 
 
