@@ -53,7 +53,7 @@ task autonomous()
   //if (SensorValue(touchSensor) == 0)
   //{
 	//Hits first friendly large ball into goal zone. (Total time: 1 second)
-bool outside=false;//set to false if behind bump,set to true if doing autonomous infront
+bool outside=true;//set to false if behind bump,set to true if doing autonomous infront
 	if(outside == true)
 		{
 		ClearTimer(T1);
@@ -67,7 +67,23 @@ bool outside=false;//set to false if behind bump,set to true if doing autonomous
   	motor[rightArm] = 70;
   	motor[leftArm2] = 70;
   	motor[rightArm2] = 70;
+
 	}
+		//If a ball is in the robot, outtake
+	ClearTimer(T1);
+	while(time1[T1] < 500)
+	{
+		motor[leftIntake] = 127;
+		motor[rightIntake] = 127;
+	}
+
+	ClearTimer(T1);
+	while(time1[T1] < 1000)
+	{
+		motor[leftIntake] = -127;
+		motor[rightIntake] = -127;
+	}
+
 	//5 point code. Confirmed to work for 5+, 10+ potential.
 	//Go back with arm up.
 	ClearTimer(T1);
@@ -109,20 +125,6 @@ bool outside=false;//set to false if behind bump,set to true if doing autonomous
   motor[rightArm] = 30;
   motor[leftArm2] = 30;
   motor[rightArm2] = 30;
-	}
-	//If a ball is in the robot, outtake
-	ClearTimer(T1);
-	while(time1[T1] < 500)
-	{
-		motor[leftIntake] = 127;
-		motor[rightIntake] = 127;
-	}
-
-	ClearTimer(T1);
-	while(time1[T1] < 1000)
-	{
-		motor[leftIntake] = -127;
-		motor[rightIntake] = -127;
 	}
 
 	motor[leftFront] = 0;
