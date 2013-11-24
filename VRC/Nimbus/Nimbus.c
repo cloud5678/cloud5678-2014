@@ -57,28 +57,33 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 	if(outside == true)
 		{
 		ClearTimer(T1);
-	while(time1[T1] < 1200)
+	while(time1[T1] < 1000)
 	{
-  	motor[leftFront] = 127;
-  	motor[leftRear] = 127;
-  	motor[rightFront] = 127;
-  	motor[rightRear] = 127;
+  	motor[leftFront] = 80;
+  	motor[leftRear] = 80;
+  	motor[rightFront] = 80;
+  	motor[rightRear] = 80;
   	motor[leftArm] = 70;
   	motor[rightArm] = 70;
   	motor[leftArm2] = 70;
   	motor[rightArm2] = 70;
 
 	}
+		motor[leftFront] = 0;
+  	motor[leftRear] = 0;
+  	motor[rightFront] = 0;
+  	motor[rightRear] = 0;
 		//If a ball is in the robot, outtake
 	ClearTimer(T1);
-	while(time1[T1] < 500)
+	while(time1[T1] < 2000)
 	{
 		motor[leftIntake] = 127;
 		motor[rightIntake] = 127;
+
 	}
 
 	ClearTimer(T1);
-	while(time1[T1] < 1000)
+	while(time1[T1] < 2000)
 	{
 		motor[leftIntake] = -127;
 		motor[rightIntake] = -127;
@@ -113,14 +118,27 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 		motor[leftIntake] = 0;
 		motor[rightIntake] = 0;
 	}
+	ClearTimer(T1);
+	while(time1[T1] < 200)
+	{
+		motor[leftArm] = -70;
+  	motor[rightArm] = -70;
+  	motor[leftArm2] = -70;
+  	motor[rightArm2] = -70;
+	}
+
 	//Go forward for two seconds.
 		ClearTimer(T1);
-	while(time1[T1] < 2000)
+	while(time1[T1] < 2200)
 	{
-  motor[leftFront] = 97;
-  motor[leftRear] = 97;
-    motor[rightFront] = 97;
-  motor[rightRear] = 97;
+		motor[leftArm] = 2;
+  	motor[rightArm] = 2;
+  	motor[leftArm2] = 2;
+  	motor[rightArm2] = 2;
+  motor[leftFront] = 80;
+  motor[leftRear] = 80;
+    motor[rightFront] = 80;
+    motor[rightRear] = 80;
     motor[leftArm] = 30;
   motor[rightArm] = 30;
   motor[leftArm2] = 30;
@@ -137,6 +155,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   motor[rightArm2] = 0;
   motor[leftIntake] = 0;
 		motor[rightIntake] = 0;
+
 }
 
 
@@ -145,26 +164,53 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 else //if behind bump (inside)
 {
 	//raise arm
-		motor[leftArm] = 45;
-		motor[rightArm] = 45;
-  	motor[leftArm2] = 45;
-  	motor[rightArm2] = 45;
+		motor[leftArm] = 65;
+		motor[rightArm] = 65;
+  	motor[leftArm2] = 65;
+  	motor[rightArm2] = 65;
 	wait1Msec(500);
 	//intake
 		motor[leftIntake] = 127;
 		motor[rightIntake] = 127;
-	wait1Msec(500);
+	wait1Msec(1000);
 	//outtake
 		motor[leftIntake] = -127;
 		motor[rightIntake] = -127;
 	wait1Msec(2000);
 		motor[leftIntake] = 0;
 		motor[rightIntake] = 0;
-
+	//move forward and hit 3 buckyballs
+		wait1Msec(2000);
+		motor[leftArm] = -22;
+		motor[rightArm] = -22;
+  	motor[leftArm2] = -22;
+  	motor[rightArm2] = -22;
+  wait1Msec(800);
+  	motor[leftArm] = 9;
+		motor[rightArm] = 9;
+  	motor[leftArm2] = 9;
+  	motor[rightArm2] = 9;
+  	motor[leftFront] = 80;
+ 	  motor[leftRear] = 80;
+    motor[rightFront] = 80;
+ 	  motor[rightRear] = 80;
+	wait1Msec(1500);
+	  motor[leftArm] = 0;
+		motor[rightArm] = 0;
+  	motor[leftArm2] = 0;
+  	motor[rightArm2] = 0;
+		motor[leftFront] = 0;
+ 	  motor[leftRear] = 0;
+    motor[rightFront] = 0;
+ 	  motor[rightRear] = 0;
+ 	  motor[leftIntake] = 0;
+		motor[rightIntake] = 0;
 
 
 }
-/*
+/*  OLD CODE DO NOT USE UNDER ANY CIRCUMSTANCES
+
+
 	//15 point + enemy ball middle zone. Currently does not work, needs testing.
 	//Keeps arm lifted, turns to the right 90 degrees. (Total time: 1.5 seconds)
 	ClearTimer(T1);
