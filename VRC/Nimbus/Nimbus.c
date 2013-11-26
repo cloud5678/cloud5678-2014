@@ -73,7 +73,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   	motor[leftRear] = 0;
   	motor[rightFront] = 0;
   	motor[rightRear] = 0;
-		//If a ball is in the robot, outtake
+		//If a ball is in the robot, outtake (you're intaking here, not outtaking) (Total time: 3 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 2000)
 	{
@@ -81,7 +81,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 		motor[rightIntake] = 127;
 
 	}
-
+		//outtake (Total time: 5 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 2000)
 	{
@@ -90,7 +90,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 	}
 
 	//5 point code. Confirmed to work for 5+, 10+ potential.
-	//Go back with arm up.
+	//Go back with arm up. (Total time: 5.9 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 900)
 	{
@@ -103,7 +103,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   	motor[leftArm2] = 10;
   	motor[rightArm2] = 10;
 	}
-	//Wait for five seconds and point robot in the direction of next ball.
+	//Wait for three seconds and point robot in the direction of next ball. (Total time: 8.9 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 3000)
 	{
@@ -118,6 +118,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 		motor[leftIntake] = 0;
 		motor[rightIntake] = 0;
 	}
+	//Lowers arm. (Total time: 9.1 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 200)
 	{
@@ -127,7 +128,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   	motor[rightArm2] = -70;
 	}
 
-	//Go forward for two seconds.
+	//Go forward for two seconds, and lifts arm. (Total time: 11.3 seconds)
 		ClearTimer(T1);
 	while(time1[T1] < 2200)
 	{
@@ -144,7 +145,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   motor[leftArm2] = 30;
   motor[rightArm2] = 30;
 	}
-
+	//Timeout
 	motor[leftFront] = 0;
   motor[leftRear] = 0;
     motor[rightFront] = 0;
@@ -163,29 +164,31 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 
 else //if behind bump (inside)
 {
-	//raise arm
+	//raise arm (Total time: 0.5 seconds)
 		motor[leftArm] = 65;
 		motor[rightArm] = 65;
   	motor[leftArm2] = 65;
   	motor[rightArm2] = 65;
 	wait1Msec(500);
-	//intake
+	//Intake to prepare for outtake. (Total time: 1.5 seconds)
 		motor[leftIntake] = 127;
 		motor[rightIntake] = 127;
 	wait1Msec(1000);
-	//outtake
+	//Outtake. (Total time: 3.5 seconds)
 		motor[leftIntake] = -127;
 		motor[rightIntake] = -127;
 	wait1Msec(2000);
+	//Wait for two seconds (manually orient robot?) (Total time: 5.5 seconds)
 		motor[leftIntake] = 0;
 		motor[rightIntake] = 0;
-	//move forward and hit 3 buckyballs
 		wait1Msec(2000);
+	//move forward and hit 3 buckyballs (this lowers the arm?) (Total time: 6.3 seconds)
 		motor[leftArm] = -22;
 		motor[rightArm] = -22;
   	motor[leftArm2] = -22;
   	motor[rightArm2] = -22;
   wait1Msec(800);
+  //Drive forwards and slightly lift arm. (Total time: 7.8 seconds)
   	motor[leftArm] = 9;
 		motor[rightArm] = 9;
   	motor[leftArm2] = 9;
@@ -195,6 +198,7 @@ else //if behind bump (inside)
     motor[rightFront] = 80;
  	  motor[rightRear] = 80;
 	wait1Msec(1500);
+	//Timeout
 	  motor[leftArm] = 0;
 		motor[rightArm] = 0;
   	motor[leftArm2] = 0;
