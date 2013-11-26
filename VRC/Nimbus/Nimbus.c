@@ -208,7 +208,7 @@ else //if behind bump (inside)
 
 
 }
-/*  OLD CODE DO NOT USE UNDER ANY CIRCUMSTANCES
+/*  OLD CODE DO NOT USE UNDER ANY CIRCUMSTANCES (This is NOT old code! It's a blueprint for a 15+ scorer that needs testing to reach a workable state. It shouldn't be used as it stands, but if we get a chance to test it will be edited to an optimal state.)
 
 
 	//15 point + enemy ball middle zone. Currently does not work, needs testing.
