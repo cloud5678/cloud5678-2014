@@ -358,10 +358,10 @@ task usercontrol()
 
 	 //Arm
           //Use Left Stick
-                motor[leftArm] = 2*(vexRT[Ch3])/3;
-                motor[rightArm] = 2*(vexRT[Ch3])/3;
-                motor[leftArm2] = 2*(vexRT[Ch3])/3;
-                motor[rightArm2] = 2*(vexRT[Ch3])/3;
+                motor[leftArm] = vexRT[Ch3];
+                motor[rightArm] = vexRT[Ch3];
+                motor[leftArm2] = vexRT[Ch3];
+                motor[rightArm2] = vexRT[Ch3];
 
                 //Intake
                 //RB Upper is Intake, LB Upper is Output
