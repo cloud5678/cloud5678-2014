@@ -73,7 +73,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
   	motor[leftRear] = 0;
   	motor[rightFront] = 0;
   	motor[rightRear] = 0;
-		//If a ball is in the robot, outtake (you're intaking here, not outtaking) (Total time: 3 seconds)
+		//If a ball is in the robot, outtake (Total time: 3 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 2000)
 	{
@@ -81,7 +81,7 @@ bool outside=true;//set to false if behind bump,set to true if doing autonomous 
 		motor[rightIntake] = 127;
 
 	}
-		//outtake (Total time: 5 seconds)
+		//intake (??) (Total time: 5 seconds)
 	ClearTimer(T1);
 	while(time1[T1] < 2000)
 	{
@@ -170,11 +170,11 @@ else //if behind bump (inside)
   	motor[leftArm2] = 65;
   	motor[rightArm2] = 65;
 	wait1Msec(500);
-	//Intake to prepare for outtake. (Total time: 1.5 seconds)
+	//Outtake. (Total time: 1.5 seconds)
 		motor[leftIntake] = 127;
 		motor[rightIntake] = 127;
 	wait1Msec(1000);
-	//Outtake. (Total time: 3.5 seconds)
+	//Intake. (????) (Total time: 3.5 seconds)
 		motor[leftIntake] = -127;
 		motor[rightIntake] = -127;
 	wait1Msec(2000);
