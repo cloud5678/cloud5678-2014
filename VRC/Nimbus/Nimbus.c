@@ -39,7 +39,13 @@ void armLift(int x)
    motor[leftIntake] = x;
    motor[rightIntake] = x;
  }
-  
+ void turn (int x, int y)
+ {
+   motor[leftFront] = x;
+   motor[leftRear] = x;
+   motor[rightFront] = y;
+   motor[rightRear] = y;
+ }
 /////////////////////////////////////////////////////////////////////////////////////////
 //
 //                          Pre-Autonomous Functions
@@ -168,10 +174,7 @@ else //if behind bump (inside)
         ClearTimer(T1);
         while(time1[T1] < 500)
         {
-        motor[leftFront] = 127;
-  motor[leftRear] = 127;
-  motor[rightFront] = -127;
-  motor[rightRear] = -127;
+        turn(127,-127);
         }
         //Hits second friendly large ball into goal zone. (Total time: 2.5 seconds)
         ClearTimer(T1);
@@ -183,10 +186,7 @@ else //if behind bump (inside)
         ClearTimer(T1);
         while(time1[T1] < 500)
         {
-  motor[leftFront] = -127;
-  motor[leftRear] = -127;
-  motor[rightFront] = 127;
-  motor[rightRear] = 127;
+   turn(-127,127);
 	armLift(-60);
         }
         //Moves up to the goal. (Total time: 4 seconds)
@@ -211,10 +211,7 @@ else //if behind bump (inside)
         ClearTimer(T1);
         while(time1[T1] < 667)
         {
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = -127;
-                motor[rightRear] = -127;
+           turn(127,-127);
               armLift(-20);
         }
         //Hits enemy large ball into middle zone. (Total time: 8 2/3 seconds)
@@ -227,10 +224,7 @@ else //if behind bump (inside)
         ClearTimer(T1);
         while(time1[T1] < 333)
         {
-                motor[leftFront] = -127;
-                motor[leftRear] = -127;
-                motor[rightFront] = 127;
-                motor[rightRear] = 127;
+           turn(-127,127);
         }
         //Hits other enemy large ball into middle zone. (Total time: 10 seconds)
         ClearTimer(T1);
@@ -243,10 +237,7 @@ else //if behind bump (inside)
         while(time1[T1] < 750)
         {
                 armLift(-60);
-                motor[leftFront] = 127;
-                motor[leftRear] = 127;
-                motor[rightFront] = -127;
-                motor[rightRear] = -127;
+                turn(127,-127);
         }
         //Travels as far as possible southwest while attempting to pick up more buckyballs. (Time out)
         ClearTimer(T1);
@@ -301,10 +292,7 @@ task usercontrol()
                 //Use Right-Stick
                 if((vexRT[Ch1] > 20) || (vexRT[Ch1] < -20))
                 {
-                        motor[leftFront] = (vexRT[Ch2] + vexRT[Ch1]);
-                        motor[leftRear] = (vexRT[Ch2] + vexRT[Ch1]);
-                        motor[rightFront] = (vexRT[Ch2] - vexRT[Ch1]);
-                        motor[rightRear] =  (vexRT[Ch2] - vexRT[Ch1]);
+                        turn((vexRT[Ch2] + vexRT[Ch1]),(vexRT[Ch2] - vexRT[Ch1]));
                 }
                 else
                 {
