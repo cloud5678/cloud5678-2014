@@ -221,7 +221,7 @@ task autonomous()
 //}
 
 
-bool outside = false; // Where Is the robot positioned????????????????????????????
+bool outside = true; // Where Is the robot positioned????????????????????????????
 
 
 if (outside == true)			//if in front of bump
@@ -245,9 +245,10 @@ setArmSpeed(-105);
 	setIntakeSpeed(-127);
 	driveArcade(-80,0);				//drive back
 
-	wait1Msec(1200);
+	wait1Msec(1300);
 	driveArcade(0,0);
 	setIntakeSpeed(0);
+
 	wait1Msec(4000);
 	driveArcade(100,0);					//drive forward
 
@@ -270,7 +271,7 @@ AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUT
  {
 
    setIntakeSpeed(127);
-   setArmSpeed(-60);
+   setArmSpeed(-63);
 
 	wait1Msec(1200);
   wait1Msec(900);
