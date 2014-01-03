@@ -270,7 +270,7 @@ task usercontrol()
 
           			int driveX = vexRT[Ch4];
 							  int driveY = vexRT[Ch3];
-							  int armSpeed = vexRT[Ch2];
+							  int armSpeed = -vexRT[Ch2];
 							  int intakeSpeed = 127*((vexRT[Btn5U]|vexRT[Btn5D])-(vexRT[Btn6U]|vexRT[Btn6D]));
 
 							  if (abs(driveY) < 5) driveY = 0; // Deadband
