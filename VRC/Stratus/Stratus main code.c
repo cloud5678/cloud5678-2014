@@ -219,40 +219,62 @@ task autonomous()
 // 	  motor[leftIntake] = 0;
 //		motor[rightIntake] = 0;
 //}
-setIntakeSpeed(127);				//drop buckie ball
-setArmSpeed(-100);
+
+
+bool outside = true; // Where Is the robot positioned????????????????????????????
+
+
+if (outside == true)			//if in front of bump
+{
+setIntakeSpeed(127);				//drop intake and outtakes
+setArmSpeed(-105);
 
 	wait1Msec(1000);
 	setArmSpeed(-25);
-	driveArcade(70,0);					//drive forward
+	driveArcade(75,0);					//drive forward
 
 	wait1Msec(1100);
 	driveArcade(0,0);
-	setIntakeSpeed(50);
-	setArmSpeed(-20);
+	setIntakeSpeed(127);
+	setArmSpeed(-25);
 
-	wait1Msec(1000);
-	setIntakeSpeed(-120);
+	wait1Msec(1000);						//drop buckyball
+	setIntakeSpeed(-127);
 
-	wait1Msec(2000);
-	setIntakeSpeed(0);
-	driveArcade(-70,0);				//drive back
+	wait1Msec(3000);
+	setIntakeSpeed(-127);
+	driveArcade(-80,0);				//drive back
 
 	wait1Msec(1200);
 	driveArcade(0,0);
 
-	wait1Msec(5000);
-	driveArcade(70,0);					//drive forward
+	wait1Msec(4000);
+	driveArcade(90,0);					//drive forward
 
 	wait1Msec(1300);
 	driveArcade(0,0);
 
 	wait1Msec(1000);
-	driveArcade(-70,0);				//drive back
+	driveArcade(-90,0);				//drive back
 
 	wait1Msec(1300);
 	driveArcade(0,0);
+}
 
+/* AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS
+AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS
+AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS */
+
+
+ else if (outside == false) //If behind bump
+ {
+   setIntakeSpeed(127);
+   setArmSpeed(-100);
+
+   wait1Msec(1200);
+   setIntakeSpeed(-127); //lowers intakes attempts to shoot buckyball as far as posssible in given direction
+ 		setArmSpeed(-25);
+ }
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
