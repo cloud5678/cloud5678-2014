@@ -268,10 +268,12 @@ AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUT
 
  else if (outside == false) //If behind bump
  {
-   setIntakeSpeed(127);
-   setArmSpeed(-100);
 
-   wait1Msec(1200);
+   setIntakeSpeed(127);
+   setArmSpeed(-60);
+
+	wait1Msec(1200);
+  wait1Msec(900);
    setIntakeSpeed(-127); //lowers intakes attempts to shoot buckyball as far as posssible in given direction
  		setArmSpeed(-25);
 
