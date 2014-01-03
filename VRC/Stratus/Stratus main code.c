@@ -221,7 +221,7 @@ task autonomous()
 //}
 
 
-bool outside = true; // Where Is the robot positioned????????????????????????????
+bool outside = false; // Where Is the robot positioned????????????????????????????
 
 
 if (outside == true)			//if in front of bump
@@ -274,6 +274,12 @@ AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUT
    wait1Msec(1200);
    setIntakeSpeed(-127); //lowers intakes attempts to shoot buckyball as far as posssible in given direction
  		setArmSpeed(-25);
+
+ 	wait1Msec(6000);
+ 		setIntakeSpeed(127);
+
+ 	wait1Msec(1000);
+ 		setIntakeSpeed(-127);
  }
 }
 
