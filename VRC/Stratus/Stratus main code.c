@@ -247,9 +247,9 @@ setArmSpeed(-105);
 
 	wait1Msec(1200);
 	driveArcade(0,0);
-
+	setIntakeSpeed(0);
 	wait1Msec(4000);
-	driveArcade(90,0);					//drive forward
+	driveArcade(100,0);					//drive forward
 
 	wait1Msec(1300);
 	driveArcade(0,0);
