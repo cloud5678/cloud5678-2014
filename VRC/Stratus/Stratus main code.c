@@ -220,33 +220,36 @@ task autonomous()
 //		motor[rightIntake] = 0;
 //}
 setIntakeSpeed(127);				//drop buckie ball
+setArmSpeed(100);
 
-	setArmSpeed(100);
 	wait1Msec(1000);
 	setArmSpeed(5);
-
 	driveArcade(70,0);					//drive forward
+
 	wait1Msec(1100);
 	driveArcade(0,0);
-
 	setIntakeSpeed(0);
 	setArmSpeed(20);
 
 	wait1Msec(1000);
+	setIntakeSpeed(-120);
 
+	wait1Msec(2000);
+	setIntakeSpeed(0);
 	driveArcade(-70,0);				//drive back
+
 	wait1Msec(1200);
 	driveArcade(0,0);
 
 	wait1Msec(5000);
-
 	driveArcade(70,0);					//drive forward
+
 	wait1Msec(1300);
 	driveArcade(0,0);
 
 	wait1Msec(1000);
-
 	driveArcade(-70,0);				//drive back
+
 	wait1Msec(1300);
 	driveArcade(0,0);
 
