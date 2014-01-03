@@ -31,16 +31,17 @@
 
 void driveArcade(int y, int x)
 {
-	motor[frontLeft] = motor[backLeft] = y + x;
-	motor[frontRight] = motor[backRight] = y - x;
+	motor[leftFront] = motor[leftRear] = y + x;
+	motor[rightFront] = motor[rightRear] = y - x;
 }
 void setArmSpeed(int z)
 {
-	motor[armRight] = motor[armLeft] = motor[armLeft2] = motor[armRight2] = z;
+	motor[rightArm] = motor[leftArm] = z;
+	//to other programmers, "leftArm" refers to both left arm motors and "rightArm" refers to both right arm motors --Mason
 }
 void setIntakeSpeed(int speed)
 {
-		motor[intakeLeft] = motor[intakeRight] = speed;
+		motor[leftIntake] = motor[rightIntake] = speed;
 }
 void pre_auton()
 {
