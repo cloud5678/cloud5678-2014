@@ -72,91 +72,9 @@ void pre_auton() {
 }
 int setpoint;
 task autonomous() {
-	// Autonomous
-
-	setIntakeSpeed(127);				//drop buckie ball
-
-	setArmSpeed(100);
-	wait1Msec(1000);
-	setArmSpeed(5);
-
-	driveArcade(70,0);					//drive forward
-	wait1Msec(1100);
-	driveArcade(0,0);
-
-	setIntakeSpeed(0);
-	setArmSpeed(20);
-
-	wait1Msec(1000);
-
-	driveArcade(-70,0);				//drive back
-	wait1Msec(1200);
-	driveArcade(0,0);
-
-	wait1Msec(5000); // begin second
-
-	driveArcade(70,0);					//drive forward
-	wait1Msec(1300);
-	driveArcade(0,0);
-
-	wait1Msec(1000);
-
-	driveArcade(-70,0);				//drive back
-	wait1Msec(1300);
-	driveArcade(0,0);
-
-	wait1Msec(5000); // begin third
-
-	setpoint = 950; 						// drive straight
-	driveArcade(70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * 10) : 0);
-	wait1Msec(1300);
-	driveArcade(0, 0);
-
-	while (SensorValue[gyro] > 0) { // turn
-		driveArcade(0, -45);
-	}
-
-	setpoint = 0; 						// drive straight
-	driveArcade(70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * 10) : 0);
-	wait1Msec(1100);
-	driveArcade(0, 0);
-
-	setpoint = 0; 						// drive back
-	driveArcade(-70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * -10) : 0);
-	wait1Msec(1100);
-	driveArcade(0, 0);
-
-	while (SensorValue[gyro] < 950) { // turn
-		driveArcade(0, 45);
-	}
-
-	setpoint = 950; 						// drive straight
-	driveArcade(70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * 10) : 0);
-	wait1Msec(300);
-	driveArcade(0, 0);
-
-	while (SensorValue[gyro] > 0) { // turn
-		driveArcade(0, -45);
-	}
-
-	setpoint = 0; 						// drive straight
-	driveArcade(70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * 10) : 0);
-	wait1Msec(1100);
-	driveArcade(0, 0);
-
-	setpoint = 0; 						// drive back
-	driveArcade(-70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * -10) : 0);
-	wait1Msec(1100);
-	driveArcade(0, 0);
-
-	while (SensorValue[gyro] > -950) { // turn
-		driveArcade(0, -45);
-	}
-
-	setpoint = 0; 						// drive straight
-	driveArcade(70, (abs(SensorValue[gyro] - setpoint) > 5) ? (((SensorValue[gyro] - setpoint) / abs(SensorValue[gyro] - setpoint)) * 10) : 0);
-	wait1Msec(1500);
-	driveArcade(0, 0);
+	
+	
+	
 }
 
 task usercontrol() {
