@@ -224,18 +224,18 @@ task autonomous()
 bool outside = false; // Where Is the robot positioned????????????????????????????
 
 
-if (outside == true)			//if in front of bump
+if (outside == false)			//if in front of bump
 {
-setIntakeSpeed(127);				//drop intake and outtakes
-setArmSpeed(-105);
-
+	setIntakeSpeed(127);
+	wait1Msec(1000);
+	setArmSpeed(-105);
 	wait1Msec(1000);
 	setArmSpeed(-25);
 	driveArcade(75,0);					//drive forward
 
 	wait1Msec(1100);
 	driveArcade(0,0);
-	setIntakeSpeed(127);
+	setIntakeSpeed(-127);
 	setArmSpeed(-25);
 
 	wait1Msec(1000);						//drop buckyball
@@ -267,7 +267,7 @@ AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUT
 AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS AUTONOMOUS */
 
 
- else if (outside == false) //If behind bump
+ else if (outside == true) //If behind bump
  {
 
    setIntakeSpeed(127);
