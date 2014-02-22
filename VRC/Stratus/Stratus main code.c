@@ -231,7 +231,7 @@ if (outside == false)			//if in front of bump
 	setArmSpeed(-105);
 	wait1Msec(1000);
 	setArmSpeed(-25);
-	driveArcade(75,0);					//drive forward
+	driveArcade(75,-17);					//drive forward
 
 	wait1Msec(1100);
 	driveArcade(0,0);
@@ -243,20 +243,20 @@ if (outside == false)			//if in front of bump
 
 	wait1Msec(3000);
 	setIntakeSpeed(-127);
-	driveArcade(-80,0);				//drive back
+	driveArcade(-80,15);				//drive back
 
 	wait1Msec(1300);
 	driveArcade(0,0);
 	setIntakeSpeed(0);
 
 	wait1Msec(4000);
-	driveArcade(100,0);					//drive forward
+	driveArcade(100,-28);					//drive forward
 
 	wait1Msec(1300);
 	driveArcade(0,0);
 
 	wait1Msec(1000);
-	driveArcade(-90,0);				//drive back
+	driveArcade(-90,25);				//drive back
 
 	wait1Msec(1300);
 	driveArcade(0,0);
