@@ -7,7 +7,7 @@ Code Repository for 2013-2014.
 ThunderCloud (5678) Contributors:  
 Nolan Shah, Ujwala Bhagavatula, Erik Ostlind  
 Nimbus (5678N) Contributors:  
-Michael Marino, Felicia Oentoro 
+Michael Marino, Felicia Oentoro  
 Stratus (5678S) Contributors:  
 Mason Cole, Robert Guan, Yijie Zhang, Gilberto Martinez
 
