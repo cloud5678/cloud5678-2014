@@ -3,8 +3,8 @@
 #pragma config(Motor,  port2,           leftFront,     tmotorVex393, openLoop)
 #pragma config(Motor,  port3,           leftIntake,    tmotorVex393, openLoop)
 #pragma config(Motor,  port4,           rightIntake,   tmotorVex393, openLoop, reversed)
-#pragma config(Motor,  port5,           rightArm,      tmotorVex393, openLoop)
-#pragma config(Motor,  port6,           leftArm,       tmotorVex393, openLoop)
+#pragma config(Motor,  port5,           rightArmTwo,      tmotorVex393, openLoop)
+#pragma config(Motor,  port6,           leftArmTwo,       tmotorVex393, openLoop)
 #pragma config(Motor,  port7,           rightArm,      tmotorVex393, openLoop)
 #pragma config(Motor,  port8,           leftArm,       tmotorVex393, openLoop)
 #pragma config(Motor,  port9,           rightFront,    tmotorVex393, openLoop, reversed)
@@ -36,8 +36,9 @@ void driveArcade(int y, int x)
 }
 void setArmSpeed(int z)
 {
-	motor[rightArm] = motor[leftArm] = z;
+	motor[rightArm] = motor[rightArmTwo] = motor[leftArmTwo] = motor[leftArm] = z;
 	//to other programmers, "leftArm" refers to both left arm motors and "rightArm" refers to both right arm motors --Mason
+				//UPDATE: Now leftArmTwo and rightArmTwo because previous namings may have caused issues
 }
 void setIntakeSpeed(int speed)
 {
