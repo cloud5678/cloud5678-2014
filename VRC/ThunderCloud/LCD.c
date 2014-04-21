@@ -9,16 +9,9 @@ const string sAuton_Skills    = "SKILLS";
 const short lcd_kLeftBtn = 1;
 const short lcd_kCenterBtn = 2;
 const short lcd_kRightBtn = 4;
-
-void displayString(string L1,string L2){
-	string blank = "";
-	if(L1!=blank || L2!=blank){
-		string line1=L1;
-		string line2=L2;
-		displayLCDCenteredString(0,line1);
-		displayLCDCenteredString(1,line2);
-	}
-}
+const short lcd_autonModeMID = 0;
+const short lcd_autonModeHANG = 1;
+int lcd_autonMode = 0;
 
 void clearLCD(){
 	clearLCDLine(0);
@@ -26,9 +19,9 @@ void clearLCD(){
 }
 
 void batteryInfo() {
-	string mainBattery, backupBattery, peBattery;
+	string mainBattery, backupBattery;//, peBattery;
 	//Display main battery voltage
-	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); //Build the value to be displayed
+	sprintf(mainBattery, "%1.2f%c", nImmediateBatteryLevel/1000.0,'V'); // Build the value to be displayed
 	string line1="M: ";
 	strcat(line1,mainBattery);
 
@@ -41,29 +34,35 @@ void batteryInfo() {
 	displayLCDString(0,0,line1);*/
 
 	//Display the Backup battery voltage
-	sprintf(backupBattery, "%1.2f%c", BackupBatteryLevel/1000.0, 'V');    //Build the value to be displayed
+	sprintf(backupBattery, "%1.2f%c", BackupBatteryLevel/1000.0, 'V');    // Build the value to be displayed
 	string line1p2=" B: ";
 	strcat(line1, line1p2);
 	strcat(line1,backupBattery);
 	displayLCDString(0,0,line1);
 }
-int lcd_autonMode = 0;
+int prevPress = 0;
 void autonSelect() {
+	if (nLCDButtons == prevPress) {
+		return;
+	}
+	prevPress = nLCDButtons;
 	string line2="A: ";
 	if (nLCDButtons == lcd_kCenterBtn) {
-			lcd_autonMode = lcd_autonMode ? 0 : 1; 
-	} 
+			lcd_autonMode++;
+			if (lcd_autonMode > 1) {
+				lcd_autonMode = 0;
+			}
+	}
 	string a = (lcd_autonMode == 0 ? sAuton_AutonomousMiddleZone : sAuton_AutonomousHangingZone);
 	strcat(line2,a);
 	displayLCDString(1,0,line2);
 }
-void initLCD() {
 
-}
-task LCDOverlord() {
-	initLCD();
+task LCDController() {
+	clearLCD();
 	while (true) {
 		batteryInfo();
 		autonSelect();
+		wait1Msec(100);
 	}
 }
